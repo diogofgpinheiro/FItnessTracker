@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">FitnessTracker</string>
+    <string name="BotaoLogin">Log in</string>
+    <string name="botaoSignup">Sign up</string>
+    <string name="log_in">Log In</string>
+    <string name="text_signUp">Sing Up</string>
 </resources>
