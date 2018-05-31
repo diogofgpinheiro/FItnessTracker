@@ -23,18 +23,20 @@
         android:textStyle="bold"
         android:textAlignment="center"
         android:maxLines="1"/>
+
     <TextView
+        android:id="@+id/textview_email"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:alpha="0.8"
         android:text="@string/what_s_your_email"
         android:textColor="#fff"
         android:textSize="20sp"
-        android:alpha="0.8"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editText_email"
@@ -54,30 +56,32 @@
         android:textCursorDrawable="@drawable/cor_cursor" />
 
     <TextView
+        android:id="@+id/textview_under_email"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:layout_marginTop="1dp"
-        android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="1dp"
+        android:alpha="0.8"
         android:text="@string/confirm_email"
         android:textColor="#fff"
-        android:alpha="0.8"
         android:textSize="12sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/textview_password"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:text="@string/pick_a_password"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:alpha="0.8"
+        android:text="@string/pick_a_password"
         android:textColor="#fff"
         android:textSize="20sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editText_passwordRegisto"
@@ -97,17 +101,18 @@
         android:textCursorDrawable="@drawable/cor_cursor" />
 
     <TextView
+        android:id="@+id/textview_under_password"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:layout_marginTop="1dp"
-        android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="1dp"
+        android:alpha="0.8"
         android:text="@string/minimo_carateres"
         android:textColor="#fff"
         android:textSize="12sp"
-        android:alpha="0.8"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/botao_proximo"
