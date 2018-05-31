@@ -11,6 +11,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //TODO verificar se o utilizador já esta logado
+
         Intent intent = new Intent(this,Login.class);
 
         startActivity(intent);
