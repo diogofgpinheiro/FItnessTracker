@@ -93,7 +93,7 @@
         android:layout_marginTop="5dp"
         android:background="@drawable/caixatexto_simples"
         android:ems="10"
-        android:inputType="textEmailAddress"
+        android:inputType="textPassword"
         android:maxLines="1"
         android:padding="8dp"
         android:textColor="#fff"
@@ -114,14 +114,45 @@
         android:textSize="12sp"
         android:textStyle="bold" />
 
+    <TextView
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:alpha="0.8"
+        android:text="@string/pick_a_password"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="gone"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/caixatexto_simples"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:padding="8dp"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        android:textCursorDrawable="@drawable/cor_cursor"
+        android:visibility="gone"/>
+
+
     <Button
         android:id="@+id/botao_proximo"
         android:layout_width="212dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="80dp"
-        android:background="@drawable/botao_login"
-        android:clickable="true"
+        android:background="@drawable/botao_next_desativado"
         android:padding="16dp"
         android:text="@string/next"
         android:textColor="#fff"
