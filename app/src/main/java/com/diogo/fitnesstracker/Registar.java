@@ -1,11 +1,13 @@
 package com.diogo.fitnesstracker;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Patterns;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -19,6 +21,7 @@ public class Registar extends AppCompatActivity {
     private TextView email_cima, email_baixo, password_cima, password_baixo;
     private Animation fromSide;
     private Button botaoNext;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +31,17 @@ public class Registar extends AppCompatActivity {
         botaoNext.setEnabled(false);
         // Insere animaçoes
         insereAnimacoes();
-        verificaMudancaEditText();
         //TODO verificar se os dados estao corretos e ativar botao next e muda-lo de cor
+        alteraEstadoEditText();
         //TODO passar para a proxima pagina ao clicar no botao
+        botaoNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(Registar.this,PaginaResgito2.class);
+                startActivity(intent);
+
+            }
+        });
         //TODO passar para a proxima pagina
     }
 
@@ -74,27 +85,6 @@ public class Registar extends AppCompatActivity {
 
     private void verificaData() {
 
-        if(!verificaVazio(editText_email) && verificaEmail(editText_email) && !verificaVazio(editText_password)
-                && editText_password.getText().toString().length() >= 8)
-        {
-            ativaBotao();
-        }else {
-            ativaBotao();
-        }
-
-        if (!verificaEmail(editText_email)) {
-            desativaBotao();
-            editText_email.setError("Introduza um email válido");
-        }
-
-        if(editText_password.getText().toString().length() < 8)
-        {
-            desativaBotao();
-            editText_password.setError("No minimo 8 caracteres");
-        }
-    }
-
-    private void verificaMudancaEditText() {
 
         editText_email.addTextChangedListener(new TextWatcher() {
             @Override
@@ -104,12 +94,17 @@ public class Registar extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                if (!verificaVazio(editText_email) && verificaEmail(editText_email) && !verificaVazio(editText_password)
+                        && editText_password.getText().toString().length() >= 8) {
+                    ativaBotao();
+                } else {
+                    desativaBotao();
+                }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                verificaData();
+
             }
         });
 
@@ -121,13 +116,45 @@ public class Registar extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                if (!verificaVazio(editText_email) && verificaEmail(editText_email) && !verificaVazio(editText_password)
+                        && editText_password.getText().toString().length() >= 8) {
+                    ativaBotao();
+                } else {
+                    desativaBotao();
+                }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
+
+    private void alteraEstadoEditText() {
+
+        editText_email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!verificaEmail(editText_email) && !verificaVazio(editText_email)) {
+                    desativaBotao();
+                    editText_email.setError("Introduza um email válido");
+                }
                 verificaData();
             }
         });
+
+        editText_password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (editText_password.getText().toString().trim().length() < 8 && !verificaVazio(editText_password)) {
+                    desativaBotao();
+                    editText_password.setError("Minimo 8 caracteres");
+                }
+                verificaData();
+            }
+        });
+
     }
 }
