@@ -25,6 +25,7 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/textview_data"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
@@ -32,13 +33,45 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:alpha="0.8"
-        android:text="@string/what_s_your_email"
+        android:text="What's your birthday?"
         android:textColor="#fff"
         android:textSize="20sp"
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/Data"
+        android:id="@+id/editText_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/caixatexto_simples"
+        android:ems="10"
+        android:focusable="false"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:padding="8dp"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        android:textCursorDrawable="@drawable/cor_cursor" />
+
+    <TextView
+        android:id="@+id/textview_genero"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:alpha="0.8"
+        android:text="What's your gender?"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editText_genero"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
@@ -53,72 +86,14 @@
         android:textColor="#fff"
         android:textColorHint="#fff"
         android:textCursorDrawable="@drawable/cor_cursor"
-        android:focusable="false" />
-
-    <TextView
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:alpha="0.8"
-        android:text="@string/what_s_your_email"
-        android:textColor="#fff"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/caixatexto_simples"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:maxLines="1"
-        android:padding="8dp"
-        android:textColor="#fff"
-        android:textColorHint="#fff"
-        android:textCursorDrawable="@drawable/cor_cursor" />
-
-    <TextView
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:alpha="0.8"
-        android:text="@string/what_s_your_email"
-        android:textColor="#fff"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/caixatexto_simples"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:maxLines="1"
-        android:padding="8dp"
-        android:textColor="#fff"
-        android:textColorHint="#fff"
-        android:textCursorDrawable="@drawable/cor_cursor" />
+        android:focusable="false"/>
 
     <Button
-        android:id="@+id/botao_proximo"
+        android:id="@+id/botao_proximo2"
         android:layout_width="212dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="82dp"
         android:background="@drawable/botao_next_desativado"
         android:padding="16dp"
         android:text="@string/next"

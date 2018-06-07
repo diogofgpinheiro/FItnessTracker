@@ -1,6 +1,7 @@
 package com.diogo.fitnesstracker;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -19,7 +20,7 @@ public class Registar extends AppCompatActivity {
     private EditText editText_email;
     private EditText editText_password;
     private TextView email_cima, email_baixo, password_cima, password_baixo;
-    private Animation fromSide;
+    private Animation fromSide,slide_out;
     private Button botaoNext;
     private Intent intent;
 
@@ -37,9 +38,16 @@ public class Registar extends AppCompatActivity {
         botaoNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(Registar.this,PaginaResgito2.class);
-                startActivity(intent);
+                removeAnimacoes(v);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
 
+                        intent = new Intent(Registar.this,PaginaResgito2.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
+                    }
+                }, 800);
             }
         });
         //TODO passar para a proxima pagina
@@ -60,8 +68,20 @@ public class Registar extends AppCompatActivity {
         email_baixo.setAnimation(fromSide);
         password_cima.setAnimation(fromSide);
         password_baixo.setAnimation(fromSide);
+        botaoNext.setAnimation(fromSide);
     }
 
+    private void removeAnimacoes(View v)
+    {
+        slide_out = AnimationUtils.loadAnimation(this, R.anim.slide_out);
+        editText_email.setAnimation(slide_out);
+        editText_password.setAnimation(slide_out);
+        email_cima.setAnimation(slide_out);
+        email_baixo.setAnimation(slide_out);
+        password_cima.setAnimation(slide_out);
+        password_baixo.setAnimation(slide_out);
+        v.startAnimation(slide_out);
+    }
 
     private boolean verificaEmail(EditText text) {
         CharSequence email = text.getText().toString();
