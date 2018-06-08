@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".Login" />
         <activity android:name=".Registar" />
-        <activity android:name=".PaginaResgito2"></activity>
+        <activity android:name=".Registar2" />
+        <activity android:name=".TerminaRegisto"/>
     </application>
 
 </manifest>

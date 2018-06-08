@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="corBotaoLogin">#39796b</color>
     <color name="corBotaoSignup">#a9d440</color>
+    <color name="corTexto">#fff</color>
 </resources>

@@ -43,7 +43,7 @@ public class Registar extends AppCompatActivity {
                     @Override
                     public void run() {
 
-                        intent = new Intent(Registar.this,PaginaResgito2.class);
+                        intent = new Intent(Registar.this,Registar2.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
                     }

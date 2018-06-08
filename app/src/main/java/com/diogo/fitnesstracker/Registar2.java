@@ -3,9 +3,9 @@ package com.diogo.fitnesstracker;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import java.util.Calendar;
 
-public class PaginaResgito2 extends AppCompatActivity {
+public class Registar2 extends AppCompatActivity {
 
     private EditText data_editText,genero_editText;
     private TextView data_textView,genero_textView;
@@ -52,6 +52,14 @@ public class PaginaResgito2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mostraDialogoGenero(v);
+            }
+        });
+
+        botao_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Registar2.this,TerminaRegisto.class);
+                startActivity(i);
             }
         });
     }
@@ -111,7 +119,7 @@ public class PaginaResgito2 extends AppCompatActivity {
         int mes = calendario.get(Calendar.MONTH);
         int dia = calendario.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog dialogData = new DatePickerDialog(PaginaResgito2.this,
+        DatePickerDialog dialogData = new DatePickerDialog(Registar2.this,
                 android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                 mDateSetListener,
                 ano,mes,dia);
