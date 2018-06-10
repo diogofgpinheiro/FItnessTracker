@@ -3,38 +3,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    >
+
+    <TextView
+        android:id="@+id/textview_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Height"
+        android:textColor="#000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
 
     <EditText
         android:id="@+id/editText_dialog"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="start" />
+        android:layout_gravity="start"
+        android:inputType="number"
+        android:layout_below="@id/textview_titulo"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:layout_marginTop="8dp"/>
 
     <TextView
-        android:id="@+id/textView_dialog"
+        android:id="@+id/textview_medida"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/editText_dialog"
         android:layout_toRightOf="@id/editText_dialog"
         android:text="kg" />
-
-    <Button
-        android:id="@+id/botao_cancelar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/editText_dialog"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="20dp"
-        android:text="Cancelar" />
-
-    <Button
-        android:id="@+id/botao_confirmar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/editText_dialog"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_toRightOf="@id/botao_cancelar"
-        android:text="OK" />
 </RelativeLayout>
