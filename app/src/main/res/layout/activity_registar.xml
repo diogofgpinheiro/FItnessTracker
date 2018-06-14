@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/bg"
-    tools:context=".Registar">
+    tools:context=".activities.Registar">
 
 
     <TextView
@@ -39,7 +39,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/editText_email"
+        android:id="@+id/editEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
@@ -84,7 +84,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/editText_passwordRegisto"
+        android:id="@+id/editPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
@@ -120,7 +120,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="80dp"
-        android:background="@drawable/botao_next_desativado"
+        android:background="@drawable/botao_login"
         android:padding="16dp"
         android:text="@string/next"
         android:textColor="#fff"

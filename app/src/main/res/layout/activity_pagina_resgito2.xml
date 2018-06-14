@@ -7,7 +7,7 @@
     android:background="@drawable/bg"
     android:orientation="vertical"
     android:focusableInTouchMode="true"
-    tools:context=".Registar2">
+    tools:context=".activities.Registar2">
 
     <TextView
         android:layout_width="wrap_content"
@@ -24,6 +24,37 @@
         android:textSize="35sp"
         android:textStyle="bold" />
 
+
+    <TextView
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:alpha="0.8"
+        android:text="What's your name?"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editNome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/caixatexto_simples"
+        android:ems="10"
+        android:inputType="text"
+        android:maxLines="1"
+        android:padding="8dp"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        android:textCursorDrawable="@drawable/cor_cursor" />
+
     <TextView
         android:id="@+id/textview_data"
         android:layout_width="220dp"
@@ -39,7 +70,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/editText_data"
+        android:id="@+id/editData"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
@@ -71,7 +102,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/editText_genero"
+        android:id="@+id/editGenero"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
@@ -80,24 +111,23 @@
         android:layout_marginTop="5dp"
         android:background="@drawable/caixatexto_simples"
         android:ems="10"
+        android:focusable="false"
         android:inputType="textEmailAddress"
         android:maxLines="1"
         android:padding="8dp"
         android:textColor="#fff"
         android:textColorHint="#fff"
-        android:textCursorDrawable="@drawable/cor_cursor"
-        android:focusable="false"/>
+        android:textCursorDrawable="@drawable/cor_cursor" />
 
     <Button
-        android:id="@+id/botao_proximo2"
+        android:id="@+id/botaoProximo"
         android:layout_width="212dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="82dp"
-        android:background="@drawable/botao_next_desativado"
+        android:background="@drawable/botao_login"
         android:padding="16dp"
         android:text="@string/next"
         android:textColor="#fff"
         android:textStyle="bold" />
-
 </LinearLayout>

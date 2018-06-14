@@ -9,16 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TerminaRegisto">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login" />
-        <activity android:name=".Registar" />
-        <activity android:name=".Registar2" />
+        <activity android:name=".activities.Login" />
+        <activity android:name=".activities.Registar" />
+        <activity android:name=".activities.Registar2" />
+        <activity android:name=".activities.TerminaRegisto" />
     </application>
 
 </manifest>

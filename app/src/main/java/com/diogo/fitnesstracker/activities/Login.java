@@ -1,12 +1,12 @@
-package com.diogo.fitnesstracker;
+package com.diogo.fitnesstracker.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
+import com.diogo.fitnesstracker.R;
 
 
 public class Login extends AppCompatActivity {
@@ -15,17 +15,10 @@ public class Login extends AppCompatActivity {
     private Button botaoSingUp;
     private Intent myIntent;
 
-    //TODO criaçao da classe utilizador
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        //TODO login do utilizador
-
-        //TODO registo do utilizador
-
         // atribuiçao do botao à variável
         botaoSingUp = (Button) findViewById(R.id.botao_singup);
         // capturar clique do botao
@@ -36,8 +29,8 @@ public class Login extends AppCompatActivity {
                 // Começar nova atividade
                 myIntent = new Intent(Login.this,Registar.class);
                 startActivity(myIntent);
+                overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
             }
         });
     }
-
 }

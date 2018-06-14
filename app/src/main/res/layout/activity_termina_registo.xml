@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg"
     android:orientation="vertical"
-    android:focusableInTouchMode="true"
-    tools:context=".TerminaRegisto">
+    tools:context=".activities.TerminaRegisto">
 
 
     <TextView
@@ -49,7 +48,6 @@
         android:layout_marginTop="5dp"
         android:background="@drawable/caixatexto_simples"
         android:ems="10"
-        android:focusable="false"
         android:inputType="number"
         android:maxLines="1"
         android:padding="8dp"
@@ -81,7 +79,6 @@
         android:layout_marginTop="5dp"
         android:background="@drawable/caixatexto_simples"
         android:ems="10"
-        android:focusable="false"
         android:inputType="number"
         android:maxLines="1"
         android:padding="8dp"
@@ -95,7 +92,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="82dp"
-        android:background="@drawable/botao_next_desativado"
+        android:background="@drawable/botao_login"
         android:padding="16dp"
         android:text="Done"
         android:textColor="#fff"

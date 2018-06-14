@@ -1,4 +1,4 @@
-package com.diogo.fitnesstracker;
+package com.diogo.fitnesstracker.activities;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,11 +17,18 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.diogo.fitnesstracker.R;
+import com.diogo.fitnesstracker.model.Utilizador;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.Calendar;
 
 public class Registar2 extends AppCompatActivity {
 
-    private EditText data_editText,genero_editText;
+    private EditText campoData,campoGenero,campoNome;
     private TextView data_textView,genero_textView;
     private Button botao_next;
     private Animation fromSide,voltaAtras;
@@ -31,8 +39,13 @@ public class Registar2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pagina_resgito2);
-        insereAnimacoesInicio();
-        data_editText.setOnClickListener(new View.OnClickListener() {
+
+        campoNome = findViewById(R.id.editNome);
+        campoData = findViewById(R.id.editData);
+        campoGenero = findViewById(R.id.editGenero);
+        botao_next = findViewById(R.id.botaoProximo);
+
+        campoData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mostraDialogoData();
@@ -44,11 +57,11 @@ public class Registar2 extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month = month + 1;
                 String data = dayOfMonth + "/" + month + "/" + year;
-                data_editText.setText(data);
+                campoData.setText(data);
             }
         };
 
-        genero_editText.setOnClickListener(new View.OnClickListener() {
+        campoGenero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mostraDialogoGenero(v);
@@ -58,42 +71,39 @@ public class Registar2 extends AppCompatActivity {
         botao_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Registar2.this,TerminaRegisto.class);
-                startActivity(i);
+
+                String textoNome = campoNome.getText().toString();
+                String textoData = campoData.getText().toString();
+                String textGenero = campoGenero.getText().toString();
+
+                if (!textoNome.isEmpty()) {
+                    if (!textoData.isEmpty()) {
+                        if(!textGenero.isEmpty()){
+
+
+                        }else {
+                            campoGenero.setError("Por favor preencha este campo");
+                        }
+                    } else {
+                        campoData.setError("Por favor preencha este campo");
+                    }
+                } else {
+                    campoNome.setError("Por favor preencha este campo");
+                }
             }
         });
-    }
-
-    private void insereAnimacoesInicio() {
-        botao_next = (Button) findViewById(R.id.botao_proximo2);
-        data_editText = (EditText) findViewById(R.id.editText_data);
-        genero_editText = (EditText) findViewById(R.id.editText_genero);
-        data_textView = (TextView) findViewById(R.id.textview_data);
-        genero_textView = (TextView) findViewById(R.id.textview_genero);
-        fromSide = AnimationUtils.loadAnimation(this, R.anim.from_side);
-        genero_editText.setAnimation(fromSide);
-        data_editText.setAnimation(fromSide);
-        genero_textView.setAnimation(fromSide);
-        data_textView.setAnimation(fromSide);
-        botao_next.setAnimation(fromSide);
-    }
-
-    private void insereAnimacoesVoltar()
-    {
-        voltaAtras = AnimationUtils.loadAnimation(this, R.anim.slide_in_dir);
-        voltaAtras.reset();
-        genero_editText.setAnimation(voltaAtras);
-        data_editText.setAnimation(voltaAtras);
-        genero_textView.setAnimation(voltaAtras);
-        data_textView.setAnimation(voltaAtras);
-        botao_next.setAnimation(voltaAtras);
-        voltaAtras.startNow();
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        insereAnimacoesVoltar();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+            }
+        });
         overridePendingTransition(R.anim.slide_in_dir,R.anim.slide_out_dir);
     }
 
@@ -103,7 +113,7 @@ public class Registar2 extends AppCompatActivity {
         mBuilder.setSingleChoiceItems(listItems, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                genero_editText.setText(listItems[which]);
+                campoGenero.setText(listItems[which]);
                 dialog.dismiss();
             }
         });

@@ -1,6 +1,5 @@
-package com.diogo.fitnesstracker;
+package com.diogo.fitnesstracker.activities;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -13,6 +12,8 @@ import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.diogo.fitnesstracker.R;
 
 public class TerminaRegisto extends AppCompatActivity {
 

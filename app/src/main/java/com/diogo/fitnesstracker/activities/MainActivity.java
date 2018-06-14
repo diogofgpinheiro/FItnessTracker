@@ -1,8 +1,11 @@
-package com.diogo.fitnesstracker;
+package com.diogo.fitnesstracker.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.diogo.fitnesstracker.R;
+import com.diogo.fitnesstracker.activities.Login;
 
 public class MainActivity extends AppCompatActivity {
 
