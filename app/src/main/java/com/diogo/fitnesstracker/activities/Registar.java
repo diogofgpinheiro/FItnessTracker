@@ -1,114 +1,106 @@
 package com.diogo.fitnesstracker.activities;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Handler;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.util.Patterns;
 import android.view.View;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.diogo.fitnesstracker.R;
-import com.diogo.fitnesstracker.config.ConfiguracaoFirebase;
-import com.diogo.fitnesstracker.helper.CodificadorBase64;
-import com.diogo.fitnesstracker.model.Utilizador;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
-import com.google.firebase.database.Exclude;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Calendar;
 
 public class Registar extends AppCompatActivity {
 
-    private EditText campoEmail, campoPassword;
-    private TextView email_cima, email_baixo, password_cima, password_baixo;
-    private Button botaoNext;
-    private Utilizador utilizador;
-    private FirebaseAuth autenticacao;
+    private EditText campoData,campoGenero,campoNome;
+    private TextView data_textView,genero_textView;
+    private Boolean verificaData = false,verificaGenero = false,verificaNome = false;
+    private Button botao_next;
+    private Animation fromSide,voltaAtras;
+    private String[] listItems = {"Male", "Female"};
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registar);
-        botaoNext = findViewById(R.id.botao_proximo);
 
-        campoEmail = findViewById(R.id.editEmail);
-        campoPassword = findViewById(R.id.editPassword);
+        campoNome = findViewById(R.id.editNome);
+        campoData = findViewById(R.id.editData);
+        campoGenero = findViewById(R.id.editGenero);
+        botao_next = findViewById(R.id.botaoProximo);
 
-        botaoNext.setOnClickListener(new View.OnClickListener() {
+        campoData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                String textoEmail = campoEmail.getText().toString();
-                String textoPassword = campoPassword.getText().toString();
-
-                if (!textoEmail.isEmpty()) {
-                    if (!textoPassword.isEmpty()) {
-
-                        utilizador = new Utilizador();
-                        utilizador.setEmail(textoEmail);
-                        utilizador.setPassword(textoPassword);
-                        registaUtilizador();
-                    } else {
-                        campoPassword.setError("Por favor preencha este campo");
-                    }
-
-                } else {
-                    campoEmail.setError("Por favor preencha este campo");
-                }
+                mostraDialogoData();
             }
         });
 
-    }
-
-    public void registaUtilizador()
-    {
-        autenticacao = ConfiguracaoFirebase.getAutenticacao();
-
-        autenticacao.createUserWithEmailAndPassword(utilizador.getEmail(),utilizador.getPassword()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                month = month + 1;
+                String data = dayOfMonth + "/" + month + "/" + year;
+                campoData.setText(data);
+            }
+        };
 
-                if(task.isSuccessful())
+        campoGenero.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mostraDialogoGenero(v);
+            }
+        });
+
+        botao_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String textoNome = campoNome.getText().toString();
+                String textoData = campoData.getText().toString();
+                String textGenero = campoGenero.getText().toString();
+
+                if (!textoNome.isEmpty()) {
+                    verificaNome = true;
+
+                } else {
+                    verificaNome = false;
+                    campoNome.setError("Por favor preencha este campo");
+                }
+                if(!textGenero.isEmpty()){
+                    verificaGenero = true;
+
+                }else {
+                    verificaGenero = false;
+                    campoGenero.setError("Por favor preencha este campo");
+                }
+
+                if (!textoData.isEmpty()) {
+                    verificaData = true;
+                } else {
+                    verificaData = false;
+                    campoData.setError("Por favor preencha este campo");
+                }
+
+                if(verificaNome && verificaGenero && verificaData)
                 {
-                    String idUtilizador = CodificadorBase64.codificaBase64(utilizador.getEmail());
-                    utilizador.setIdUtilizador(idUtilizador);
                     startActivity(new Intent(Registar.this,Registar2.class));
                     overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
-                }else {
-                    String excessao = "";
-                    try
-                    {
-                        throw task.getException();
-                    }catch (FirebaseAuthWeakPasswordException e)
-                    {
-                        excessao = "Digite uma senha mais forte!";
-                        campoPassword.setError(excessao);
-                    }catch (FirebaseAuthInvalidCredentialsException e)
-                    {
-                        excessao = "Digite um email válido por favor!";
-                        campoEmail.setError(excessao);
-                    }catch (FirebaseAuthUserCollisionException e)
-                    {
-                        excessao = "Esta conta já existe!";
-                        campoEmail.setError(excessao);
-                    }catch (Exception e)
-                    {
-                        excessao = "Erro ao registar o utilizador" + e.getMessage();
-                        Toast.makeText(Registar.this,excessao,Toast.LENGTH_SHORT).show();
-                    }
                 }
             }
         });
@@ -119,4 +111,37 @@ public class Registar extends AppCompatActivity {
         super.onBackPressed();
         overridePendingTransition(R.anim.slide_in_dir,R.anim.slide_out_dir);
     }
+
+    private void mostraDialogoGenero(View v) {
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
+        mBuilder.setTitle("Gender");
+        mBuilder.setSingleChoiceItems(listItems, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                campoGenero.setText(listItems[which]);
+                campoGenero.setError(null);
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog mDialog = mBuilder.create();
+        mDialog.show();
+    }
+
+    private void mostraDialogoData()
+    {
+        Calendar calendario = Calendar.getInstance();
+        int ano = calendario.get(Calendar.YEAR);
+        int mes = calendario.get(Calendar.MONTH);
+        int dia = calendario.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog dialogData = new DatePickerDialog(Registar.this,
+                android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                mDateSetListener,
+                ano,mes,dia);
+        dialogData.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        campoData.setError(null);
+        dialogData.show();
+    }
+
 }

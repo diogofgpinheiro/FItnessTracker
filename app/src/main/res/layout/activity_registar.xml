@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/bg"
+    android:orientation="vertical"
+    android:focusableInTouchMode="true"
     tools:context=".activities.Registar">
-
 
     <TextView
         android:layout_width="wrap_content"
@@ -15,17 +15,17 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="50dp"
-        android:textAllCaps="false"
-        android:text="@string/create_account_view"
-        android:textColor="#fff"
         android:alpha="0.8"
-        android:textSize="35sp"
-        android:textStyle="bold"
+        android:maxLines="1"
+        android:text="@string/create_account_view"
         android:textAlignment="center"
-        android:maxLines="1"/>
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="35sp"
+        android:textStyle="bold" />
+
 
     <TextView
-        android:id="@+id/textview_email"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
@@ -33,13 +33,13 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:alpha="0.8"
-        android:text="@string/what_s_your_email"
+        android:text="What's your name?"
         android:textColor="#fff"
         android:textSize="20sp"
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/editEmail"
+        android:id="@+id/editNome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
@@ -48,6 +48,38 @@
         android:layout_marginTop="5dp"
         android:background="@drawable/caixatexto_simples"
         android:ems="10"
+        android:inputType="text"
+        android:maxLines="1"
+        android:padding="8dp"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        android:textCursorDrawable="@drawable/cor_cursor" />
+
+    <TextView
+        android:id="@+id/textview_data"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:alpha="0.8"
+        android:text="What's your birthday?"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/caixatexto_simples"
+        android:ems="10"
+        android:focusable="false"
         android:inputType="textEmailAddress"
         android:maxLines="1"
         android:padding="8dp"
@@ -56,21 +88,7 @@
         android:textCursorDrawable="@drawable/cor_cursor" />
 
     <TextView
-        android:id="@+id/textview_under_email"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="1dp"
-        android:alpha="0.8"
-        android:text="@string/confirm_email"
-        android:textColor="#fff"
-        android:textSize="12sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/textview_password"
+        android:id="@+id/textview_genero"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
@@ -78,13 +96,13 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:alpha="0.8"
-        android:text="@string/pick_a_password"
+        android:text="What's your gender?"
         android:textColor="#fff"
         android:textSize="20sp"
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/editPassword"
+        android:id="@+id/editGenero"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
@@ -93,37 +111,23 @@
         android:layout_marginTop="5dp"
         android:background="@drawable/caixatexto_simples"
         android:ems="10"
-        android:inputType="textPassword"
+        android:focusable="false"
+        android:inputType="textEmailAddress"
         android:maxLines="1"
         android:padding="8dp"
         android:textColor="#fff"
         android:textColorHint="#fff"
         android:textCursorDrawable="@drawable/cor_cursor" />
 
-    <TextView
-        android:id="@+id/textview_under_password"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="1dp"
-        android:alpha="0.8"
-        android:text="@string/minimo_carateres"
-        android:textColor="#fff"
-        android:textSize="12sp"
-        android:textStyle="bold" />
-
     <Button
-        android:id="@+id/botao_proximo"
+        android:id="@+id/botaoProximo"
         android:layout_width="212dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="82dp"
         android:background="@drawable/botao_login"
         android:padding="16dp"
         android:text="@string/next"
         android:textColor="#fff"
         android:textStyle="bold" />
-
 </LinearLayout>

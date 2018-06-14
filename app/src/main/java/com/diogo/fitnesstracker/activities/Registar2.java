@@ -1,140 +1,156 @@
 package com.diogo.fitnesstracker.activities;
 
-import android.app.AlertDialog;
-import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.diogo.fitnesstracker.R;
-import com.diogo.fitnesstracker.model.Utilizador;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-import java.util.Calendar;
 
 public class Registar2 extends AppCompatActivity {
 
-    private EditText campoData,campoGenero,campoNome;
-    private TextView data_textView,genero_textView;
-    private Button botao_next;
-    private Animation fromSide,voltaAtras;
-    private String[] listItems = {"Male", "Female"};
-    private DatePickerDialog.OnDateSetListener mDateSetListener;
+    private EditText campoAltura, campoPeso,campoAtividade;
+    private TextView textView_height, textView_weight;
+    private Context context = Registar2.this;
+    private Button botaoProximo;
+    private String [] listItems = {"Little to no exercise","Light exercise(1-3 days per week)","Moderate exercise(3-5 days per week)","Heavy exercise(6-7 days per week)","Very heavy exercise(twice per day)"};
+    private Boolean verificaAltura = false, verificaPeso = false, verificaAtividade = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pagina_resgito2);
+        setContentView(R.layout.activity_registar2);
+        campoAltura = findViewById(R.id.editAltura);
+        campoPeso = findViewById(R.id.editPeso);
+        campoAtividade = findViewById(R.id.editAtividade);
+        botaoProximo = findViewById(R.id.botaoProximo);
 
-        campoNome = findViewById(R.id.editNome);
-        campoData = findViewById(R.id.editData);
-        campoGenero = findViewById(R.id.editGenero);
-        botao_next = findViewById(R.id.botaoProximo);
-
-        campoData.setOnClickListener(new View.OnClickListener() {
+        campoAltura.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mostraDialogoData();
+                //TODO inserção do dialogo para a altura
+                criaDialogo("Height","cm", campoAltura);
             }
         });
 
-        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                month = month + 1;
-                String data = dayOfMonth + "/" + month + "/" + year;
-                campoData.setText(data);
-            }
-        };
-
-        campoGenero.setOnClickListener(new View.OnClickListener() {
+        campoPeso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mostraDialogoGenero(v);
+                //TODO inserção do dialogo para o peso
+                criaDialogo("Weight","kg", campoPeso);
             }
         });
 
-        botao_next.setOnClickListener(new View.OnClickListener() {
+        campoAtividade.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                criaDialogoAtividade();
+            }
+        });
+
+        botaoProximo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String textoNome = campoNome.getText().toString();
-                String textoData = campoData.getText().toString();
-                String textGenero = campoGenero.getText().toString();
+                String textoAltura = campoAltura.getText().toString();
+                String textoPeso = campoAltura.getText().toString();
+                String textoAtividade = campoAtividade.getText().toString();
 
-                if (!textoNome.isEmpty()) {
-                    if (!textoData.isEmpty()) {
-                        if(!textGenero.isEmpty()){
+                if (!textoAltura.isEmpty()) {
+                    verificaAltura= true;
 
-
-                        }else {
-                            campoGenero.setError("Por favor preencha este campo");
-                        }
-                    } else {
-                        campoData.setError("Por favor preencha este campo");
-                    }
                 } else {
-                    campoNome.setError("Por favor preencha este campo");
+                    verificaAltura = false;
+                    campoAltura.setError("Por favor preencha este campo");
+                }
+                if(!textoPeso.isEmpty()){
+                    verificaPeso = true;
+
+                }else {
+                    verificaPeso = false;
+                    campoPeso.setError("Por favor preencha este campo");
+                }
+
+                if (!textoAtividade.isEmpty()) {
+                    verificaAtividade = true;
+                } else {
+                    verificaAtividade = false;
+                    campoAtividade.setError("Por favor preencha este campo");
+                }
+
+                if(verificaAltura && verificaPeso && verificaAtividade)
+                {
+                    startActivity(new Intent(Registar2.this,Registar3.class));
+                    overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
                 }
             }
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
+    public void criaDialogo(String titulo, String medida, final EditText editText)
+    {
+        LayoutInflater layoutInflater = LayoutInflater.from(context);//obtem um layout xml para uma view
+        View mView = layoutInflater.inflate(R.layout.costum_dialog, null);
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+        alertDialogBuilder.setView(mView);
 
+        final EditText editText_dialog = (EditText) mView.findViewById(R.id.editText_dialog);
+        TextView textView_titulo = (TextView)  mView.findViewById(R.id.textview_titulo);
+        TextView textView_medida = (TextView)  mView.findViewById(R.id.textview_medida);
+
+        textView_titulo.setText(titulo);
+        textView_medida.setText(medida);
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogBox, int id) {
+                        //TODO ler dados do utilizador e guardar
+                        editText.setText(editText_dialog.getText());
+                        editText.setError(null);
+                    }
+                })
+
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialogBox, int id) {
+                                dialogBox.cancel();
+                            }
+                        });
+
+        final AlertDialog dialog = alertDialogBuilder.create();
+
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#39796b"));
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#39796b"));
             }
         });
-        overridePendingTransition(R.anim.slide_in_dir,R.anim.slide_out_dir);
+        dialog.show();
     }
 
-    private void mostraDialogoGenero(View v) {
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
-        mBuilder.setTitle("Gender");
+    public void criaDialogoAtividade()
+    {
+        android.app.AlertDialog.Builder mBuilder = new android.app.AlertDialog.Builder(this);
+        mBuilder.setTitle("Activity level");
         mBuilder.setSingleChoiceItems(listItems, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                campoGenero.setText(listItems[which]);
+                campoAtividade.setText(listItems[which]);
+                campoAtividade.setError(null);
                 dialog.dismiss();
             }
         });
 
-        AlertDialog mDialog = mBuilder.create();
+        android.app.AlertDialog mDialog = mBuilder.create();
         mDialog.show();
     }
-
-    private void mostraDialogoData()
-    {
-        Calendar calendario = Calendar.getInstance();
-        int ano = calendario.get(Calendar.YEAR);
-        int mes = calendario.get(Calendar.MONTH);
-        int dia = calendario.get(Calendar.DAY_OF_MONTH);
-
-        DatePickerDialog dialogData = new DatePickerDialog(Registar2.this,
-                android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                mDateSetListener,
-                ano,mes,dia);
-        dialogData.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialogData.show();
-    }
-
 }

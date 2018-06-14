@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg"
     android:orientation="vertical"
-    android:focusableInTouchMode="true"
     tools:context=".activities.Registar2">
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -17,60 +17,29 @@
         android:layout_marginTop="50dp"
         android:alpha="0.8"
         android:maxLines="1"
-        android:text="@string/create_account_view"
+        android:text="Create Account"
         android:textAlignment="center"
         android:textAllCaps="false"
-        android:textColor="#fff"
+        android:textColor="@color/corTexto"
         android:textSize="35sp"
         android:textStyle="bold" />
 
-
     <TextView
-        android:layout_width="220dp"
+        android:id="@+id/textview_height"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:alpha="0.8"
-        android:text="What's your name?"
+        android:text="What's your height?"
         android:textColor="#fff"
         android:textSize="20sp"
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/editNome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/caixatexto_simples"
-        android:ems="10"
-        android:inputType="text"
-        android:maxLines="1"
-        android:padding="8dp"
-        android:textColor="#fff"
-        android:textColorHint="#fff"
-        android:textCursorDrawable="@drawable/cor_cursor" />
-
-    <TextView
-        android:id="@+id/textview_data"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:alpha="0.8"
-        android:text="What's your birthday?"
-        android:textColor="#fff"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/editData"
+        android:id="@+id/editAltura"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
@@ -80,7 +49,7 @@
         android:background="@drawable/caixatexto_simples"
         android:ems="10"
         android:focusable="false"
-        android:inputType="textEmailAddress"
+        android:inputType="number"
         android:maxLines="1"
         android:padding="8dp"
         android:textColor="#fff"
@@ -88,21 +57,21 @@
         android:textCursorDrawable="@drawable/cor_cursor" />
 
     <TextView
-        android:id="@+id/textview_genero"
-        android:layout_width="220dp"
+        android:id="@+id/textview_weight"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:alpha="0.8"
-        android:text="What's your gender?"
+        android:text="How much do you weight?"
         android:textColor="#fff"
         android:textSize="20sp"
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/editGenero"
+        android:id="@+id/editPeso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
@@ -112,7 +81,38 @@
         android:background="@drawable/caixatexto_simples"
         android:ems="10"
         android:focusable="false"
-        android:inputType="textEmailAddress"
+        android:inputType="number"
+        android:maxLines="1"
+        android:padding="8dp"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        android:textCursorDrawable="@drawable/cor_cursor" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:alpha="0.8"
+        android:text="What´s your activity level?"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editAtividade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/caixatexto_simples"
+        android:ems="10"
+        android:focusable="false"
+        android:inputType="number"
         android:maxLines="1"
         android:padding="8dp"
         android:textColor="#fff"
@@ -127,7 +127,8 @@
         android:layout_marginTop="82dp"
         android:background="@drawable/botao_login"
         android:padding="16dp"
-        android:text="@string/next"
+        android:text="Next"
         android:textColor="#fff"
         android:textStyle="bold" />
+
 </LinearLayout>
