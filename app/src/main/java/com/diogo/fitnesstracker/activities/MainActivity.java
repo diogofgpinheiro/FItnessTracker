@@ -6,19 +6,39 @@ import android.os.Bundle;
 
 import com.diogo.fitnesstracker.R;
 import com.diogo.fitnesstracker.activities.Login;
+import com.diogo.fitnesstracker.config.ConfiguracaoFirebase;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
+
+    private FirebaseAuth autenticacao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //TODO verificar se o utilizador já esta logado
+        startActivity(new Intent(this,teste.class));
+    }
 
-        Intent intent = new Intent(this,Login.class);
-
-        startActivity(intent);
+    /*@Override
+    protected void onStart() {
+        super.onStart();
+        verificarUtilizadorLogado();
 
     }
+
+    public void verificarUtilizadorLogado()
+    {
+        //obtem instancia da autenticação da firebase
+        autenticacao = ConfiguracaoFirebase.getAutenticacao();
+        //verifica se o utilizador está logado ou não
+        if(autenticacao == null)
+        {
+            startActivity(new Intent(this,Login.class));
+            finish();
+        }else {
+
+        }
+    }*/
 }

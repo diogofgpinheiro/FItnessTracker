@@ -14,20 +14,23 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.diogo.fitnesstracker.R;
+import com.diogo.fitnesstracker.model.Utilizador;
 
 public class Registar2 extends AppCompatActivity {
 
     private EditText campoAltura, campoPeso,campoAtividade;
-    private TextView textView_height, textView_weight;
     private Context context = Registar2.this;
     private Button botaoProximo;
     private String [] listItems = {"Little to no exercise","Light exercise(1-3 days per week)","Moderate exercise(3-5 days per week)","Heavy exercise(6-7 days per week)","Very heavy exercise(twice per day)"};
     private Boolean verificaAltura = false, verificaPeso = false, verificaAtividade = false;
+    private Bundle extras;
+    private String textoNome,textoData,textoGenero;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registar2);
+        extras = getIntent().getExtras();
         campoAltura = findViewById(R.id.editAltura);
         campoPeso = findViewById(R.id.editPeso);
         campoAtividade = findViewById(R.id.editAtividade);
@@ -36,7 +39,7 @@ public class Registar2 extends AppCompatActivity {
         campoAltura.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO inserção do dialogo para a altura
+                //inserção do dialogo para a altura
                 criaDialogo("Height","cm", campoAltura);
             }
         });
@@ -44,7 +47,7 @@ public class Registar2 extends AppCompatActivity {
         campoPeso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO inserção do dialogo para o peso
+                //inserção do dialogo para o peso
                 criaDialogo("Weight","kg", campoPeso);
             }
         });
@@ -61,7 +64,7 @@ public class Registar2 extends AppCompatActivity {
             public void onClick(View v) {
 
                 String textoAltura = campoAltura.getText().toString();
-                String textoPeso = campoAltura.getText().toString();
+                String textoPeso = campoPeso.getText().toString();
                 String textoAtividade = campoAtividade.getText().toString();
 
                 if (!textoAltura.isEmpty()) {
@@ -88,7 +91,20 @@ public class Registar2 extends AppCompatActivity {
 
                 if(verificaAltura && verificaPeso && verificaAtividade)
                 {
-                    startActivity(new Intent(Registar2.this,Registar3.class));
+                    if(extras != null)
+                    {
+                        textoNome = extras.getString("NOME");
+                        textoData = extras.getString("DATA");
+                        textoGenero = extras.getString("GENERO");
+                    }
+                    Intent intent = new Intent(Registar2.this,Registar3.class);
+                    intent.putExtra("NOME",textoNome);
+                    intent.putExtra("DATA",textoData);
+                    intent.putExtra("GENERO",textoGenero);
+                    intent.putExtra("ALTURA",textoAltura);
+                    intent.putExtra("PESO",textoPeso);
+                    intent.putExtra("ATIVIDADE",textoAtividade);
+                    startActivity(intent);
                     overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
                 }
             }

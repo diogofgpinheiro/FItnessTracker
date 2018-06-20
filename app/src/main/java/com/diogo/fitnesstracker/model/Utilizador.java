@@ -15,6 +15,15 @@ public class Utilizador {
     private double altura;
     private String sexo;
     private String data_criacao;
+    private String atividade;
+
+    public String getAtividade() {
+        return atividade;
+    }
+
+    public void setAtividade(String atividade) {
+        this.atividade = atividade;
+    }
 
     @Exclude
     public String getPassword() {

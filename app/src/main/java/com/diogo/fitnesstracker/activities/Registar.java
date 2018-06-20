@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.diogo.fitnesstracker.R;
+import com.diogo.fitnesstracker.model.Utilizador;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,10 +28,8 @@ import java.util.Calendar;
 public class Registar extends AppCompatActivity {
 
     private EditText campoData,campoGenero,campoNome;
-    private TextView data_textView,genero_textView;
     private Boolean verificaData = false,verificaGenero = false,verificaNome = false;
     private Button botao_next;
-    private Animation fromSide,voltaAtras;
     private String[] listItems = {"Male", "Female"};
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
@@ -99,7 +98,11 @@ public class Registar extends AppCompatActivity {
 
                 if(verificaNome && verificaGenero && verificaData)
                 {
-                    startActivity(new Intent(Registar.this,Registar2.class));
+                    Intent intent = new Intent(Registar.this,Registar2.class);
+                    intent.putExtra("NOME",textoNome);
+                    intent.putExtra("GENERO",textGenero);
+                    intent.putExtra("DATA",textoData);
+                    startActivity(intent);
                     overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
                 }
             }
@@ -109,6 +112,7 @@ public class Registar extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        //adiciona animação ao voltar atrás
         overridePendingTransition(R.anim.slide_in_dir,R.anim.slide_out_dir);
     }
 

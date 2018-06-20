@@ -22,19 +22,24 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class Registar3 extends AppCompatActivity {
 
     private EditText campoEmail, campoPassword;
-    private TextView email_cima, email_baixo, password_cima, password_baixo;
     private Button botaoNext;
     private Utilizador utilizador;
     private FirebaseAuth autenticacao;
+    private Bundle extras;
+    private String textoNome,textoGenero,textoData,textoAltura,textoPeso,textoAtividade;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registar3);
         botaoNext = findViewById(R.id.botao_proximo);
+        extras = getIntent().getExtras();
 
         campoEmail = findViewById(R.id.editEmail);
         campoPassword = findViewById(R.id.editPassword);
@@ -75,10 +80,29 @@ public class Registar3 extends AppCompatActivity {
 
                 if(task.isSuccessful())
                 {
+                    Date currentTime = Calendar.getInstance().getTime();
                     String idUtilizador = CodificadorBase64.codificaBase64(utilizador.getEmail());
+
+                    if(extras != null)
+                    {
+                        textoNome = extras.getString("NOME");
+                        textoData = extras.getString("DATA");
+                        textoGenero = extras.getString("GENERO");
+                        textoAltura = extras.getString("ALTURA");
+                        textoPeso = extras.getString("PESO");
+                        textoAtividade = extras.getString("ATIVIDADE");
+                    }
+
+                    utilizador.setNome(textoNome);
+                    utilizador.setSexo(textoGenero);
+                    utilizador.setData_nascimento(textoData);
+                    utilizador.setAltura(Double.parseDouble(textoAltura));
+                    utilizador.setPeso(Double.parseDouble(textoPeso));
+                    utilizador.setAtividade(textoAtividade);
                     utilizador.setIdUtilizador(idUtilizador);
-                    startActivity(new Intent(Registar3.this,Registar.class));
-                    overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
+                    utilizador.setData_criacao(currentTime.toString());
+                    utilizador.gravar();
+                    startActivity(new Intent(Registar3.this,MainActivity.class));
                 }else {
                     String excessao = "";
                     try
