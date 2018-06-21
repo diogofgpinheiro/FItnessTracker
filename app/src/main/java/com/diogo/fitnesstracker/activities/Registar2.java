@@ -18,13 +18,13 @@ import com.diogo.fitnesstracker.model.Utilizador;
 
 public class Registar2 extends AppCompatActivity {
 
-    private EditText campoAltura, campoPeso,campoAtividade;
+    private EditText campoAltura, campoPeso, campoAtividade;
     private Context context = Registar2.this;
     private Button botaoProximo;
-    private String [] listItems = {"Little to no exercise","Light exercise(1-3 days per week)","Moderate exercise(3-5 days per week)","Heavy exercise(6-7 days per week)","Very heavy exercise(twice per day)"};
+    private String[] listItems = {"Little to no exercise", "Light exercise(1-3 days per week)", "Moderate exercise(3-5 days per week)", "Heavy exercise(6-7 days per week)", "Very heavy exercise(twice per day)"};
     private Boolean verificaAltura = false, verificaPeso = false, verificaAtividade = false;
     private Bundle extras;
-    private String textoNome,textoData,textoGenero;
+    private String textoNome, textoData, textoGenero;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class Registar2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //inserção do dialogo para a altura
-                criaDialogo("Height","cm", campoAltura);
+                criaDialogo("Height", "cm", campoAltura);
             }
         });
 
@@ -48,7 +48,7 @@ public class Registar2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //inserção do dialogo para o peso
-                criaDialogo("Weight","kg", campoPeso);
+                criaDialogo("Weight", "kg", campoPeso);
             }
         });
 
@@ -67,60 +67,47 @@ public class Registar2 extends AppCompatActivity {
                 String textoPeso = campoPeso.getText().toString();
                 String textoAtividade = campoAtividade.getText().toString();
 
-                if (!textoAltura.isEmpty()) {
-                    verificaAltura= true;
-
-                } else {
-                    verificaAltura = false;
+                if (textoAltura.isEmpty()) {
                     campoAltura.setError("Por favor preencha este campo");
+                    return;
                 }
-                if(!textoPeso.isEmpty()){
-                    verificaPeso = true;
-
-                }else {
-                    verificaPeso = false;
+                if (textoPeso.isEmpty()) {
                     campoPeso.setError("Por favor preencha este campo");
+                    return;
                 }
 
-                if (!textoAtividade.isEmpty()) {
-                    verificaAtividade = true;
-                } else {
-                    verificaAtividade = false;
+                if (textoAtividade.isEmpty()) {
                     campoAtividade.setError("Por favor preencha este campo");
+                    return;
                 }
 
-                if(verificaAltura && verificaPeso && verificaAtividade)
-                {
-                    if(extras != null)
-                    {
-                        textoNome = extras.getString("NOME");
-                        textoData = extras.getString("DATA");
-                        textoGenero = extras.getString("GENERO");
-                    }
-                    Intent intent = new Intent(Registar2.this,Registar3.class);
-                    intent.putExtra("NOME",textoNome);
-                    intent.putExtra("DATA",textoData);
-                    intent.putExtra("GENERO",textoGenero);
-                    intent.putExtra("ALTURA",textoAltura);
-                    intent.putExtra("PESO",textoPeso);
-                    intent.putExtra("ATIVIDADE",textoAtividade);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
+                if (extras != null) {
+                    textoNome = extras.getString("NOME");
+                    textoData = extras.getString("DATA");
+                    textoGenero = extras.getString("GENERO");
                 }
+                Intent intent = new Intent(Registar2.this, Registar3.class);
+                intent.putExtra("NOME", textoNome);
+                intent.putExtra("DATA", textoData);
+                intent.putExtra("GENERO", textoGenero);
+                intent.putExtra("ALTURA", textoAltura);
+                intent.putExtra("PESO", textoPeso);
+                intent.putExtra("ATIVIDADE", textoAtividade);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
             }
         });
     }
 
-    public void criaDialogo(String titulo, String medida, final EditText editText)
-    {
+    public void criaDialogo(String titulo, String medida, final EditText editText) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);//obtem um layout xml para uma view
         View mView = layoutInflater.inflate(R.layout.costum_dialog, null);
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
         alertDialogBuilder.setView(mView);
 
-        final EditText editText_dialog = (EditText) mView.findViewById(R.id.editText_dialog);
-        TextView textView_titulo = (TextView)  mView.findViewById(R.id.textview_titulo);
-        TextView textView_medida = (TextView)  mView.findViewById(R.id.textview_medida);
+        final EditText editText_dialog =  mView.findViewById(R.id.editText_dialog);
+        TextView textView_titulo = mView.findViewById(R.id.textview_titulo);
+        TextView textView_medida = mView.findViewById(R.id.textview_medida);
 
         textView_titulo.setText(titulo);
         textView_medida.setText(medida);
@@ -153,8 +140,7 @@ public class Registar2 extends AppCompatActivity {
         dialog.show();
     }
 
-    public void criaDialogoAtividade()
-    {
+    public void criaDialogoAtividade() {
         android.app.AlertDialog.Builder mBuilder = new android.app.AlertDialog.Builder(this);
         mBuilder.setTitle("Activity level");
         mBuilder.setSingleChoiceItems(listItems, -1, new DialogInterface.OnClickListener() {

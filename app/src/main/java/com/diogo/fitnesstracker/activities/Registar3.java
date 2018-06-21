@@ -51,20 +51,22 @@ public class Registar3 extends AppCompatActivity {
                 String textoEmail = campoEmail.getText().toString();
                 String textoPassword = campoPassword.getText().toString();
 
-                if (!textoEmail.isEmpty()) {
-                    if (!textoPassword.isEmpty()) {
-
-                        utilizador = new Utilizador();
-                        utilizador.setEmail(textoEmail);
-                        utilizador.setPassword(textoPassword);
-                        registaUtilizador();
-                    } else {
-                        campoPassword.setError("Por favor preencha este campo");
-                    }
-
-                } else {
+                if(textoEmail.isEmpty())
+                {
                     campoEmail.setError("Por favor preencha este campo");
+                    return;
                 }
+
+                if(textoPassword.isEmpty())
+                {
+                    campoPassword.setError("Por favor preencha este campo");
+                    return;
+                }
+
+                utilizador = new Utilizador();
+                utilizador.setEmail(textoEmail);
+                utilizador.setPassword(textoPassword);
+                registaUtilizador();
             }
         });
 
