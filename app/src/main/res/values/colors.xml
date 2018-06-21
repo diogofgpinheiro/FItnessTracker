@@ -6,4 +6,10 @@
     <color name="corBotaoLogin">#39796b</color>
     <color name="corBotaoSignup">#a9d440</color>
     <color name="corTexto">#fff</color>
+
+
+
+    <!-- Cores bottom navigation -->
+    <color name="corItemSelecionado">#fff</color>
+    <color name="corItem">#fff</color>
 </resources>

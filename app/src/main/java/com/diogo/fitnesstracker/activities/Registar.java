@@ -74,37 +74,28 @@ public class Registar extends AppCompatActivity {
                 String textoData = campoData.getText().toString();
                 String textGenero = campoGenero.getText().toString();
 
-                if (!textoNome.isEmpty()) {
-                    verificaNome = true;
-
-                } else {
-                    verificaNome = false;
+                if (textoNome.isEmpty()) {
                     campoNome.setError("Por favor preencha este campo");
+                    return;
                 }
-                if(!textGenero.isEmpty()){
-                    verificaGenero = true;
 
-                }else {
-                    verificaGenero = false;
+
+                if(textGenero.isEmpty()){
                     campoGenero.setError("Por favor preencha este campo");
+                    return;
                 }
 
-                if (!textoData.isEmpty()) {
-                    verificaData = true;
-                } else {
-                    verificaData = false;
+                if (textoData.isEmpty()) {
                     campoData.setError("Por favor preencha este campo");
+                    return;
                 }
 
-                if(verificaNome && verificaGenero && verificaData)
-                {
-                    Intent intent = new Intent(Registar.this,Registar2.class);
-                    intent.putExtra("NOME",textoNome);
-                    intent.putExtra("GENERO",textGenero);
-                    intent.putExtra("DATA",textoData);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
-                }
+                Intent intent = new Intent(Registar.this,Registar2.class);
+                intent.putExtra("NOME",textoNome);
+                intent.putExtra("GENERO",textGenero);
+                intent.putExtra("DATA",textoData);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
             }
         });
     }

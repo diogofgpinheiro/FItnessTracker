@@ -8,4 +8,8 @@
     <string name="pick_a_password">Pick a password</string>
     <string name="minimo_carateres">At least eight characters.</string>
     <string name="next">Next</string>
+    <string name="title_activity_teste_bottom_navigation">testeBottomNavigation</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
