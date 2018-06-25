@@ -18,10 +18,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        startActivity(new Intent(this,teste.class));
     }
 
-    /*@Override
+    @Override
     protected void onStart() {
         super.onStart();
         verificarUtilizadorLogado();
@@ -33,12 +32,13 @@ public class MainActivity extends AppCompatActivity {
         //obtem instancia da autenticação da firebase
         autenticacao = ConfiguracaoFirebase.getAutenticacao();
         //verifica se o utilizador está logado ou não
-        if(autenticacao == null)
+        if(autenticacao.getCurrentUser() != null)
         {
-            startActivity(new Intent(this,Login.class));
+            startActivity(new Intent(this,PaginaPrincipal.class));
             finish();
         }else {
-
+            startActivity(new Intent(this,Login.class));
+            finish();
         }
-    }*/
+    }
 }

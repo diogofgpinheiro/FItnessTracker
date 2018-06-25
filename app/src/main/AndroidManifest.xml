@@ -29,7 +29,7 @@
             android:name=".activities.Registar2"
             android:theme="@style/AppThemeNoActionBar" />
         <activity android:name=".activities.teste" />
-        <activity android:name=".activities.testeBottomNav"></activity>
+        <activity android:name=".activities.PaginaPrincipal"/>
     </application>
 
 </manifest>
