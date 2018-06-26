@@ -21,4 +21,14 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string-array name="Titulos">
+        <item>Nome</item>
+        <item>Altura</item>
+        <item>Peso</item>
+        <item>Género</item>
+        <item>Data de nascimento</item>
+        <item>E-mail</item>
+    </string-array>
 </resources>

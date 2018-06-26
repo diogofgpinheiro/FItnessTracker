@@ -24,7 +24,7 @@ public class PaginaPrincipal extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_teste_bottom_nav);
+        setContentView(R.layout.activity_pagina_principal);
 
         toolbar = getSupportActionBar();
         toolbar.setTitle("Diário");
@@ -67,6 +67,7 @@ public class PaginaPrincipal extends AppCompatActivity {
                 {
                     case R.id.navigation_perfil:
                         fragmentTransaction.replace(R.id.frame_layout,new PerfilFragment()).commit();
+                        toolbar.setTitle("Perfil");
                         return true;
                     case R.id.navigation_metas:
                         fragmentTransaction.replace(R.id.frame_layout,new MetasFragment()).commit();
