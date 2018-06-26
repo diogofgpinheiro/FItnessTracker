@@ -139,6 +139,5 @@ public class PerfilFragment extends Fragment {
         textViewObjetivo.setVisibility(View.VISIBLE);
         textViewPeso.setVisibility(View.VISIBLE);
         imageViewPerfil.setVisibility(View.VISIBLE);
-
     }
 }

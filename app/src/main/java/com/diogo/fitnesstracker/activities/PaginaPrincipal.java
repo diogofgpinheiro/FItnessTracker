@@ -71,12 +71,15 @@ public class PaginaPrincipal extends AppCompatActivity {
                         return true;
                     case R.id.navigation_metas:
                         fragmentTransaction.replace(R.id.frame_layout,new MetasFragment()).commit();
+                        toolbar.setTitle("Metas");
                         return true;
                     case R.id.navigation_diario:
                         fragmentTransaction.replace(R.id.frame_layout,new DiarioFragment()).commit();
+                        toolbar.setTitle("Diário");
                         return true;
                     case R.id.navigation_progresso:
                         fragmentTransaction.replace(R.id.frame_layout,new ProgressoFragment()).commit();
+                        toolbar.setTitle("Progresso");
                         return true;
                 }
                 return false;
