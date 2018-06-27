@@ -26,14 +26,14 @@
 
 
     <TextView
-        android:layout_width="220dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:alpha="0.8"
-        android:text="What's your name?"
+        android:text="Qual é o seu nome?"
         android:textColor="#fff"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -57,14 +57,14 @@
 
     <TextView
         android:id="@+id/textview_data"
-        android:layout_width="220dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:alpha="0.8"
-        android:text="What's your birthday?"
+        android:text="Qual é a sua data de nascimento?"
         android:textColor="#fff"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -96,7 +96,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:alpha="0.8"
-        android:text="What's your gender?"
+        android:text="Qual é o seu género?"
         android:textColor="#fff"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -127,7 +127,7 @@
         android:layout_marginTop="82dp"
         android:background="@drawable/botao_login"
         android:padding="16dp"
-        android:text="@string/next"
+        android:text="Próximo"
         android:textColor="#fff"
         android:textStyle="bold" />
 </LinearLayout>

@@ -33,7 +33,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:alpha="0.8"
-        android:text="What's your height?"
+        android:text="Qual é a sua altura?"
         android:textColor="#fff"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -65,7 +65,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:alpha="0.8"
-        android:text="How much do you weight?"
+        android:text="Quanto pesa?"
         android:textColor="#fff"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -96,7 +96,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:alpha="0.8"
-        android:text="What´s your activity level?"
+        android:text="Qual é o seu nível de atividade?"
         android:textColor="#fff"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -127,7 +127,7 @@
         android:layout_marginTop="82dp"
         android:background="@drawable/botao_login"
         android:padding="16dp"
-        android:text="Next"
+        android:text="Próximo"
         android:textColor="#fff"
         android:textStyle="bold" />
 

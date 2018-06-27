@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.diogo.fitnesstracker.R;
 import com.diogo.fitnesstracker.config.ConfiguracaoFirebase;
 import com.diogo.fitnesstracker.helper.CodificadorBase64;
+import com.diogo.fitnesstracker.model.MetasPeso;
 import com.diogo.fitnesstracker.model.Utilizador;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -21,7 +22,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
+import com.google.firebase.database.DatabaseReference;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -30,7 +33,9 @@ public class Registar3 extends AppCompatActivity {
     private EditText campoEmail, campoPassword;
     private Button botaoNext;
     private Utilizador utilizador;
+    private MetasPeso metasPeso;
     private FirebaseAuth autenticacao;
+    private DatabaseReference firebaseRef;
     private Bundle extras;
     private String textoNome,textoGenero,textoData,textoAltura,textoPeso,textoAtividade;
 
@@ -64,6 +69,7 @@ public class Registar3 extends AppCompatActivity {
                 }
 
                 utilizador = new Utilizador();
+                metasPeso = new MetasPeso();
                 utilizador.setEmail(textoEmail);
                 utilizador.setPassword(textoPassword);
                 registaUtilizador();
@@ -83,6 +89,8 @@ public class Registar3 extends AppCompatActivity {
                 if(task.isSuccessful())
                 {
                     Date currentTime = Calendar.getInstance().getTime();
+                    SimpleDateFormat dataformat = new SimpleDateFormat("dd/MM/yyyy");
+                    String data = dataformat.format(currentTime);
                     String idUtilizador = CodificadorBase64.codificaBase64(utilizador.getEmail());
 
                     if(extras != null)
@@ -102,8 +110,15 @@ public class Registar3 extends AppCompatActivity {
                     utilizador.setPeso(Double.parseDouble(textoPeso));
                     utilizador.setAtividade(textoAtividade);
                     utilizador.setIdUtilizador(idUtilizador);
-                    utilizador.setData_criacao(currentTime.toString());
+                    utilizador.setData_criacao(data);
                     utilizador.gravar();
+                    metasPeso.setPeso_inicial(Double.parseDouble(textoPeso));
+                    metasPeso.setPeso(Double.parseDouble(textoPeso));
+                    metasPeso.setMeta_peso(Double.parseDouble(textoPeso));
+                    metasPeso.setMeta_semanal(0);
+                    metasPeso.setNivel_atividade(textoAtividade);
+                    metasPeso.setData_inicial(data);
+                    metasPeso.gravar(idUtilizador);
                     startActivity(new Intent(Registar3.this,MainActivity.class));
                 }else {
                     String excessao = "";

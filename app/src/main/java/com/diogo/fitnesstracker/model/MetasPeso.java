@@ -1,5 +1,10 @@
 package com.diogo.fitnesstracker.model;
 
+import com.diogo.fitnesstracker.config.ConfiguracaoFirebase;
+import com.diogo.fitnesstracker.helper.CodificadorBase64;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+
 public class MetasPeso {
 
     private double peso_inicial;
@@ -55,5 +60,14 @@ public class MetasPeso {
 
     public void setData_inicial(String data_incial) {
         this.data_inicial = data_incial;
+    }
+
+    public void gravar(String IDUtilizador)
+    {
+        DatabaseReference referenciaFirebase = ConfiguracaoFirebase.getReferenciaFirebase();
+        referenciaFirebase.child("Metas")
+                .child(IDUtilizador)
+                .child("MetasPeso")
+                .setValue(this);
     }
 }
