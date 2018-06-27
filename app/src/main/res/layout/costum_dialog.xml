@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:padding="16dp"
     >
 
-    <TextView
-        android:id="@+id/textview_titulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Height"
-        android:textColor="#000"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        />
+<TextView
+    android:id="@+id/textview_titulo"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Height"
+    android:textColor="#000"
+    android:textSize="20sp"
+    android:textStyle="bold"
+    />
 
-    <EditText
-        android:id="@+id/editText_dialog"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:inputType="number"
-        android:layout_below="@id/textview_titulo"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:layout_marginTop="8dp"/>
+<EditText
+    android:id="@+id/editText_dialog"
+    android:layout_width="100dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="start"
+    android:inputType="numberDecimal"
+    android:layout_below="@id/textview_titulo"
+    android:backgroundTint="@color/colorPrimaryDark"
+    android:layout_marginTop="8dp"/>
 
-    <TextView
-        android:id="@+id/textview_medida"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/editText_dialog"
-        android:layout_toRightOf="@id/editText_dialog"
-        android:text="kg" />
+<TextView
+    android:id="@+id/textview_medida"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignBottom="@id/editText_dialog"
+    android:layout_toRightOf="@id/editText_dialog"
+    android:text="kg" />
 </RelativeLayout>

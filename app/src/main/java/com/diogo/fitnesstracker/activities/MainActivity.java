@@ -9,9 +9,12 @@ import com.diogo.fitnesstracker.activities.Login;
 import com.diogo.fitnesstracker.config.ConfiguracaoFirebase;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.security.Permission;
+
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth autenticacao;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.diogo.fitnesstracker.Manifest;
 import com.diogo.fitnesstracker.R;
 import com.diogo.fitnesstracker.adapter.adapterListaPerfil;
 import com.diogo.fitnesstracker.config.ConfiguracaoFirebase;
@@ -44,7 +45,6 @@ public class PerfilFragment extends Fragment {
     private DatabaseReference perfilRef;
     private ValueEventListener valueEventListenerPerfil;
 
-    private Button botaoEditar;
     private TextView dadosAltura,dadosPeso,dadosObjetivo,dadosNome,textViewAltura,textViewPeso,textViewObjetivo;
     private ImageView imageViewPerfil;
     private ProgressBar progressBar;
@@ -59,7 +59,6 @@ public class PerfilFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_perfil, container, false);
-        botaoEditar = v.findViewById(R.id.buttonEditar);
         dadosAltura = v.findViewById(R.id.dadosAltura);
         dadosPeso = v.findViewById(R.id.dadosPeso);
         dadosObjetivo = v.findViewById(R.id.dadosObjetivo);
@@ -70,7 +69,6 @@ public class PerfilFragment extends Fragment {
         textViewPeso = v.findViewById(R.id.textViewPeso);
         imageViewPerfil = v.findViewById(R.id.imageView);
 
-        mostraRecyclerView();
 
         recyclerView = v.findViewById(R.id.recyclerViewPerfil);
         adapterListaPerfil = new adapterListaPerfil(getContext(),listaPerfil);
@@ -84,17 +82,6 @@ public class PerfilFragment extends Fragment {
         super.onCreate(savedInstanceState);
         obtemDados();
     }
-
-    public void mostraRecyclerView()
-    {
-        botaoEditar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                recyclerView.setVisibility(View.VISIBLE);
-            }
-        });
-    }
-
 
     public void obtemDados()
     {
@@ -130,7 +117,6 @@ public class PerfilFragment extends Fragment {
     public void mostraLayout()
     {
         progressBar.setVisibility(View.GONE);
-        botaoEditar.setVisibility(View.VISIBLE);
         dadosAltura.setVisibility(View.VISIBLE);
         dadosPeso.setVisibility(View.VISIBLE);
         dadosObjetivo.setVisibility(View.VISIBLE);
@@ -139,5 +125,6 @@ public class PerfilFragment extends Fragment {
         textViewObjetivo.setVisibility(View.VISIBLE);
         textViewPeso.setVisibility(View.VISIBLE);
         imageViewPerfil.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.VISIBLE);
     }
 }

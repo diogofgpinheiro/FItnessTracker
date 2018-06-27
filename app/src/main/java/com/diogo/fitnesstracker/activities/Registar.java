@@ -27,10 +27,10 @@ import java.util.Calendar;
 
 public class Registar extends AppCompatActivity {
 
-    private EditText campoData,campoGenero,campoNome;
-    private Boolean verificaData = false,verificaGenero = false,verificaNome = false;
+    private EditText campoData, campoGenero, campoNome;
+    private Boolean verificaData = false, verificaGenero = false, verificaNome = false;
     private Button botao_next;
-    private String[] listItems = {"Male", "Female"};
+    private String[] listItems = {"Masculino", "Feminino"};
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     @Override
@@ -80,7 +80,7 @@ public class Registar extends AppCompatActivity {
                 }
 
 
-                if(textGenero.isEmpty()){
+                if (textGenero.isEmpty()) {
                     campoGenero.setError("Por favor preencha este campo");
                     return;
                 }
@@ -90,12 +90,12 @@ public class Registar extends AppCompatActivity {
                     return;
                 }
 
-                Intent intent = new Intent(Registar.this,Registar2.class);
-                intent.putExtra("NOME",textoNome);
-                intent.putExtra("GENERO",textGenero);
-                intent.putExtra("DATA",textoData);
+                Intent intent = new Intent(Registar.this, Registar2.class);
+                intent.putExtra("NOME", textoNome);
+                intent.putExtra("GENERO", textGenero);
+                intent.putExtra("DATA", textoData);
                 startActivity(intent);
-                overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
             }
         });
     }
@@ -104,12 +104,12 @@ public class Registar extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         //adiciona animação ao voltar atrás
-        overridePendingTransition(R.anim.slide_in_dir,R.anim.slide_out_dir);
+        overridePendingTransition(R.anim.slide_in_dir, R.anim.slide_out_dir);
     }
 
     private void mostraDialogoGenero(View v) {
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
-        mBuilder.setTitle("Gender");
+        mBuilder.setTitle("Género");
         mBuilder.setSingleChoiceItems(listItems, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -123,8 +123,7 @@ public class Registar extends AppCompatActivity {
         mDialog.show();
     }
 
-    private void mostraDialogoData()
-    {
+    private void mostraDialogoData() {
         Calendar calendario = Calendar.getInstance();
         int ano = calendario.get(Calendar.YEAR);
         int mes = calendario.get(Calendar.MONTH);
@@ -133,7 +132,7 @@ public class Registar extends AppCompatActivity {
         DatePickerDialog dialogData = new DatePickerDialog(Registar.this,
                 android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                 mDateSetListener,
-                ano,mes,dia);
+                ano, mes, dia);
         dialogData.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         campoData.setError(null);
         dialogData.show();
