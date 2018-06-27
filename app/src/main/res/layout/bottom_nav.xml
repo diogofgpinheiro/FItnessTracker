@@ -8,4 +8,5 @@
     android:background="@android:color/white"
     app:itemIconTint="@drawable/cor_item_navbar"
     app:itemTextColor="@drawable/cor_item_navbar"
-    app:menu="@menu/navigation" />
+    app:menu="@menu/navigation"
+    android:alpha="0.9"/>
