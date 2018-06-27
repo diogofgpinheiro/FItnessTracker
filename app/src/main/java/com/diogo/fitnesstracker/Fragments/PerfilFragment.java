@@ -29,6 +29,7 @@ import com.diogo.fitnesstracker.R;
 import com.diogo.fitnesstracker.adapter.adapterListaPerfil;
 import com.diogo.fitnesstracker.config.ConfiguracaoFirebase;
 import com.diogo.fitnesstracker.helper.CodificadorBase64;
+import com.diogo.fitnesstracker.model.ItemsRecycler;
 import com.diogo.fitnesstracker.model.Perfil;
 import com.diogo.fitnesstracker.model.Utilizador;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -58,7 +59,7 @@ public class PerfilFragment extends Fragment {
     View v;
     private RecyclerView recyclerView;
     private adapterListaPerfil adapterListaPerfil;
-    private List<Perfil> listaPerfil = new ArrayList<>();
+    private List<ItemsRecycler> listaPerfil = new ArrayList<>();
 
     private FirebaseAuth autenticacao = ConfiguracaoFirebase.getAutenticacao();
     private DatabaseReference firebaseRef = ConfiguracaoFirebase.getReferenciaFirebase();
@@ -233,12 +234,12 @@ public class PerfilFragment extends Fragment {
                 Utilizador utilizador = dataSnapshot.getValue(Utilizador.class);
                 String campoAltura = Double.toString((int) utilizador.getAltura());
                 String campoPeso = Double.toString(utilizador.getPeso());
-                listaPerfil.add(new Perfil("Nome",utilizador.getNome()));
-                listaPerfil.add(new Perfil("Altura",Double.toString(utilizador.getAltura()) + " cm"));
-                listaPerfil.add(new Perfil("Peso",Double.toString(utilizador.getPeso()) + " kg"));
-                listaPerfil.add(new Perfil("Genero",utilizador.getSexo()));
-                listaPerfil.add(new Perfil("Data de nascimento",utilizador.getData_nascimento()));
-                listaPerfil.add(new Perfil("E-mail",utilizador.getEmail()));
+                listaPerfil.add(new ItemsRecycler("Nome",utilizador.getNome()));
+                listaPerfil.add(new ItemsRecycler("Altura",Double.toString(utilizador.getAltura()) + " cm"));
+                listaPerfil.add(new ItemsRecycler("Peso",Double.toString(utilizador.getPeso()) + " kg"));
+                listaPerfil.add(new ItemsRecycler("Genero",utilizador.getSexo()));
+                listaPerfil.add(new ItemsRecycler("Data de nascimento",utilizador.getData_nascimento()));
+                listaPerfil.add(new ItemsRecycler("E-mail",utilizador.getEmail()));
                 dadosAltura.setText(campoAltura);
                 dadosPeso.setText(campoPeso);
                 dadosNome.setText(utilizador.getNome());

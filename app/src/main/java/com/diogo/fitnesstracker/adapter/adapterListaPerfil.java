@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.diogo.fitnesstracker.R;
 import com.diogo.fitnesstracker.config.ConfiguracaoFirebase;
 import com.diogo.fitnesstracker.helper.CodificadorBase64;
+import com.diogo.fitnesstracker.model.ItemsRecycler;
 import com.diogo.fitnesstracker.model.Perfil;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -29,7 +30,7 @@ import java.util.List;
 public class adapterListaPerfil extends RecyclerView.Adapter<adapterListaPerfil.ViewHolder> {
 
     Context context;
-    List<Perfil> dados;
+    List<ItemsRecycler> dados;
     private Double Altura;
     private FirebaseAuth autenticacao = ConfiguracaoFirebase.getAutenticacao();
     private DatabaseReference firebaseRef = ConfiguracaoFirebase.getReferenciaFirebase();
@@ -37,7 +38,7 @@ public class adapterListaPerfil extends RecyclerView.Adapter<adapterListaPerfil.
     private String[] itemsDialogo = {"Masculino", "Feminino"};
 
 
-    public adapterListaPerfil(Context context,List<Perfil> dados) {
+    public adapterListaPerfil(Context context,List<ItemsRecycler> dados) {
         this.context = context;
         this.dados = dados;
     }
