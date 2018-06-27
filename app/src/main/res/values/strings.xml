@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">FitnessTracker</string>
     <string name="log_in">Log In</string>
-    <string name="text_signUp">Sign Up</string>
-    <string name="create_account_view">Create account</string>
+    <string name="text_signUp">Registar</string>
+    <string name="create_account_view">Criar conta</string>
     <string name="what_s_your_email">What´s your email?</string>
     <string name="confirm_email">You´ll need to confirm email later.</string>
     <string name="pick_a_password">Pick a password</string>

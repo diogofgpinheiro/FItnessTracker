@@ -19,7 +19,6 @@ import com.diogo.fitnesstracker.R;
 import com.diogo.fitnesstracker.config.ConfiguracaoFirebase;
 import com.diogo.fitnesstracker.helper.CodificadorBase64;
 import com.diogo.fitnesstracker.model.ItemsRecycler;
-import com.diogo.fitnesstracker.model.Perfil;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
@@ -128,16 +127,20 @@ public class adapterListaPerfil extends RecyclerView.Adapter<adapterListaPerfil.
         textView_medida.setText(medida);
         alertDialogBuilder
                 .setCancelable(false)
-                .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialogBox, int id) {
                         //TODO ler dados do utilizador e guardar
                         String IDUtilizador = CodificadorBase64.codificaBase64(autenticacao.getCurrentUser().getEmail());
-                        Double altura = Double.parseDouble(editText_dialog.getText().toString());
-                        firebaseRef.child("Utilizadores").child(IDUtilizador).child(valor).setValue(altura);
+                        Double valorTexto = Double.parseDouble(editText_dialog.getText().toString());
+                        firebaseRef.child("Utilizadores").child(IDUtilizador).child(valor).setValue(valorTexto);
+                        if(valor.equals("peso"))
+                        {
+                            firebaseRef.child("Metas").child(IDUtilizador).child("MetasPeso").child("peso").setValue(valorTexto);
+                        }
                     }
                 })
 
-                .setNegativeButton("Cancel",
+                .setNegativeButton("Cancelar",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialogBox, int id) {
                                 dialogBox.cancel();                            }
@@ -196,7 +199,7 @@ public class adapterListaPerfil extends RecyclerView.Adapter<adapterListaPerfil.
 
         alertDialogBuilder
                 .setCancelable(false)
-            .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            .setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialogBox, int id) {
                     //TODO ler dados do utilizador e guardar
                     String IDUtilizador = CodificadorBase64.codificaBase64(autenticacao.getCurrentUser().getEmail());
@@ -204,8 +207,7 @@ public class adapterListaPerfil extends RecyclerView.Adapter<adapterListaPerfil.
                     firebaseRef.child("Utilizadores").child(IDUtilizador).child("nome").setValue(nome);
                 }
             })
-
-            .setNegativeButton("Cancel",
+            .setNegativeButton("Cancelar",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialogBox, int id) {
                             dialogBox.cancel();                            }

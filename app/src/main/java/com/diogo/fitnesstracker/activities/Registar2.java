@@ -21,7 +21,7 @@ public class Registar2 extends AppCompatActivity {
     private EditText campoAltura, campoPeso, campoAtividade;
     private Context context = Registar2.this;
     private Button botaoProximo;
-    private String[] listItems = {"Little to no exercise", "Light exercise(1-3 days per week)", "Moderate exercise(3-5 days per week)", "Heavy exercise(6-7 days per week)", "Very heavy exercise(twice per day)"};
+    private String[] listItems = {"Não muito ativo", "Levemente ativo", "Ativo", "Bastante ativo"};
     private Boolean verificaAltura = false, verificaPeso = false, verificaAtividade = false;
     private Bundle extras;
     private String textoNome, textoData, textoGenero;
@@ -40,7 +40,7 @@ public class Registar2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //inserção do dialogo para a altura
-                criaDialogo("Height", "cm", campoAltura);
+                criaDialogo("Altura", "cm", campoAltura);
             }
         });
 
@@ -48,7 +48,7 @@ public class Registar2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //inserção do dialogo para o peso
-                criaDialogo("Weight", "kg", campoPeso);
+                criaDialogo("Peso", "kg", campoPeso);
             }
         });
 
@@ -113,7 +113,7 @@ public class Registar2 extends AppCompatActivity {
         textView_medida.setText(medida);
         alertDialogBuilder
                 .setCancelable(false)
-                .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialogBox, int id) {
                         //TODO ler dados do utilizador e guardar
                         editText.setText(editText_dialog.getText());
@@ -121,7 +121,7 @@ public class Registar2 extends AppCompatActivity {
                     }
                 })
 
-                .setNegativeButton("Cancel",
+                .setNegativeButton("Cancelar",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialogBox, int id) {
                                 dialogBox.cancel();
@@ -142,7 +142,7 @@ public class Registar2 extends AppCompatActivity {
 
     public void criaDialogoAtividade() {
         android.app.AlertDialog.Builder mBuilder = new android.app.AlertDialog.Builder(this);
-        mBuilder.setTitle("Activity level");
+        mBuilder.setTitle("Nivel de Atividade");
         mBuilder.setSingleChoiceItems(listItems, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

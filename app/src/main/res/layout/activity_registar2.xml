@@ -17,7 +17,7 @@
         android:layout_marginTop="50dp"
         android:alpha="0.8"
         android:maxLines="1"
-        android:text="Create Account"
+        android:text="@string/create_account_view"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/corTexto"

@@ -23,12 +23,17 @@ public class adapterListaMetasNutricao extends RecyclerView.Adapter<adapterLista
         this.dados = dados;
     }
 
+
+
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.lista_metas_nutricao,parent,false);
         final ViewHolder vHolder = new ViewHolder(v);
+
+
         return vHolder;
     }
 

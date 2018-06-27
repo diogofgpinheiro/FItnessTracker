@@ -28,9 +28,10 @@ import com.diogo.fitnesstracker.Manifest;
 import com.diogo.fitnesstracker.R;
 import com.diogo.fitnesstracker.adapter.adapterListaPerfil;
 import com.diogo.fitnesstracker.config.ConfiguracaoFirebase;
+import com.diogo.fitnesstracker.helper.Calorias;
 import com.diogo.fitnesstracker.helper.CodificadorBase64;
 import com.diogo.fitnesstracker.model.ItemsRecycler;
-import com.diogo.fitnesstracker.model.Perfil;
+import com.diogo.fitnesstracker.model.MetasPeso;
 import com.diogo.fitnesstracker.model.Utilizador;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -64,7 +65,11 @@ public class PerfilFragment extends Fragment {
     private FirebaseAuth autenticacao = ConfiguracaoFirebase.getAutenticacao();
     private DatabaseReference firebaseRef = ConfiguracaoFirebase.getReferenciaFirebase();
     private DatabaseReference perfilRef;
+    private DatabaseReference metasRef;
+    private DatabaseReference valoresRef;
     private ValueEventListener valueEventListenerPerfil;
+    private ValueEventListener valueEventListenerMetas;
+    private ValueEventListener valueEventListenerValores;
     private StorageReference storage = ConfiguracaoFirebase.getFirebaseStorage();
 
     private TextView dadosAltura,dadosPeso,dadosObjetivo,dadosNome,textViewAltura,textViewPeso,textViewObjetivo;
@@ -227,6 +232,7 @@ public class PerfilFragment extends Fragment {
 
         String IDUtilizador = CodificadorBase64.codificaBase64(autenticacao.getCurrentUser().getEmail());
         perfilRef = firebaseRef.child("Utilizadores").child(IDUtilizador);
+        metasRef = firebaseRef.child("Metas").child(IDUtilizador).child("MetasPeso");
         valueEventListenerPerfil = perfilRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -243,12 +249,25 @@ public class PerfilFragment extends Fragment {
                 dadosAltura.setText(campoAltura);
                 dadosPeso.setText(campoPeso);
                 dadosNome.setText(utilizador.getNome());
+                obtemValores(utilizador.getPeso(),utilizador.getAltura(),utilizador.getSexo(),utilizador.getData_nascimento());
                 adapterListaPerfil.notifyDataSetChanged();
-
                 mostraLayout();
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+        valueEventListenerMetas = metasRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                MetasPeso metasPeso = dataSnapshot.getValue(MetasPeso.class);
+                dadosObjetivo.setText(Double.toString(metasPeso.getMeta_peso()));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
     }
@@ -267,9 +286,31 @@ public class PerfilFragment extends Fragment {
         recyclerView.setVisibility(View.VISIBLE);
     }
 
+    public void obtemValores(final double peso,final double altura,final String genero,final String data)
+    {
+        final String IDUtilizador = CodificadorBase64.codificaBase64(autenticacao.getCurrentUser().getEmail());
+        valoresRef = firebaseRef.child("Metas").child(IDUtilizador).child("MetasPeso");
+        valueEventListenerValores = valoresRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                MetasPeso metasPeso = dataSnapshot.getValue(MetasPeso.class);
+                Calorias calorias = new Calorias(peso,altura,genero);
+                int cal = calorias.calculaCalorias(metasPeso.getNivel_atividade(),metasPeso.getMeta_semanal(),data);
+                firebaseRef.child("Metas").child(IDUtilizador).child("MetasNutricao").child("Calorias").setValue(cal);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
     @Override
     public void onStop() {
         super.onStop();
         perfilRef.removeEventListener(valueEventListenerPerfil);
+        metasRef.removeEventListener(valueEventListenerMetas);
+        valoresRef.removeEventListener(valueEventListenerValores);
     }
 }

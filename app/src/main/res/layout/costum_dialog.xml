@@ -12,7 +12,7 @@ android:padding="16dp"
     android:layout_height="wrap_content"
     android:text="Height"
     android:textColor="#000"
-    android:textSize="20sp"
+    android:textSize="18sp"
     android:textStyle="bold"
     />
 
