@@ -4,16 +4,12 @@
 
     <uses-feature
         android:name="android.hardware.camera2"
-        android:required="true"
-        />
+        android:required="true" />
 
-
-
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -42,7 +38,9 @@
             android:name=".activities.Registar2"
             android:theme="@style/AppThemeNoActionBar" />
         <activity android:name=".activities.teste" />
-        <activity android:name=".activities.PaginaPrincipal"/>
+        <activity android:name=".activities.PaginaPrincipal" />
+        <activity android:name=".activities.MetasCalorias" />
+        <activity android:name=".activities.MetasRefeicao"></activity>
     </application>
 
 </manifest>

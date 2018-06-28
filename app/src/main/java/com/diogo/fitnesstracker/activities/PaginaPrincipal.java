@@ -16,8 +16,6 @@ import android.view.MenuItem;
 import com.diogo.fitnesstracker.Fragments.DiarioFragment;
 import com.diogo.fitnesstracker.Fragments.MetasFragment;
 import com.diogo.fitnesstracker.Fragments.PerfilFragment;
-import com.diogo.fitnesstracker.Fragments.ProgressoFragment;
-import com.diogo.fitnesstracker.Manifest;
 import com.diogo.fitnesstracker.R;
 import com.diogo.fitnesstracker.helper.Permissao;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
@@ -25,7 +23,6 @@ import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 public class PaginaPrincipal extends AppCompatActivity {
 
     private ActionBar toolbar;
-
     private String[] permissoesNecessarias = new String[]
             {
                     android.Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -49,8 +46,7 @@ public class PaginaPrincipal extends AppCompatActivity {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout,new DiarioFragment()).commit();
-
+        fragmentTransaction.replace(R.id.frame_layout, new DiarioFragment()).commit();
     }
 
     @Override
@@ -86,7 +82,6 @@ public class PaginaPrincipal extends AppCompatActivity {
     private void configuraBottomNavView()
     {
         BottomNavigationViewEx bottomNavigationViewEx = findViewById(R.id.bottomNavigation);
-
         bottomNavigationViewEx.enableAnimation(false);
         bottomNavigationViewEx.enableItemShiftingMode(true);
         bottomNavigationViewEx.enableShiftingMode(false);
@@ -97,7 +92,7 @@ public class PaginaPrincipal extends AppCompatActivity {
         NavegaFragmentos(bottomNavigationViewEx);
 
         Menu menu = bottomNavigationViewEx.getMenu();
-        MenuItem menuItem = menu.getItem(2);
+        MenuItem menuItem = menu.getItem(1);
         menuItem.setChecked(true);
     }
 
@@ -122,10 +117,6 @@ public class PaginaPrincipal extends AppCompatActivity {
                     case R.id.navigation_diario:
                         fragmentTransaction.replace(R.id.frame_layout,new DiarioFragment()).commit();
                         toolbar.setTitle("Diário");
-                        return true;
-                    case R.id.navigation_progresso:
-                        fragmentTransaction.replace(R.id.frame_layout,new ProgressoFragment()).commit();
-                        toolbar.setTitle("Progresso");
                         return true;
                 }
                 return false;

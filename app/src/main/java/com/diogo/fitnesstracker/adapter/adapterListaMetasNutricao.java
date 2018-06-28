@@ -1,14 +1,18 @@
 package com.diogo.fitnesstracker.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.diogo.fitnesstracker.R;
+import com.diogo.fitnesstracker.activities.MetasCalorias;
+import com.diogo.fitnesstracker.activities.MetasRefeicao;
 import com.diogo.fitnesstracker.model.ItemsRecycler;
 
 import java.util.List;
@@ -33,7 +37,23 @@ public class adapterListaMetasNutricao extends RecyclerView.Adapter<adapterLista
                 .inflate(R.layout.lista_metas_nutricao,parent,false);
         final ViewHolder vHolder = new ViewHolder(v);
 
-
+        vHolder.titulo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int item = vHolder.getAdapterPosition();
+                switch (item)
+                {
+                    case 0:
+                        Intent i = new Intent(context,MetasCalorias.class);
+                        context.startActivity(i);
+                        break;
+                    case 1:
+                        Intent i2 = new Intent(context,MetasRefeicao.class);
+                        context.startActivity(i2);
+                        break;
+                }
+            }
+        });
         return vHolder;
     }
 

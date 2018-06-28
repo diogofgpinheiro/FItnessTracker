@@ -119,7 +119,9 @@ public class Registar3 extends AppCompatActivity {
                     metasPeso.setNivel_atividade(textoAtividade);
                     metasPeso.setData_inicial(data);
                     metasPeso.gravar(idUtilizador);
-                    startActivity(new Intent(Registar3.this,MainActivity.class));
+                    Intent i = new Intent(Registar3.this,PaginaPrincipal.class);
+                    startActivity(i);
+                    finish();
                 }else {
                     String excessao = "";
                     try

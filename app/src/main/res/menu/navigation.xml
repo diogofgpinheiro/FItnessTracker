@@ -8,17 +8,12 @@
         android:title="@string/titulo_perfil"/>
 
     <item
-        android:id = "@+id/navigation_metas"
-        android:icon="@drawable/ic_metas"
-        android:title="@string/titulo_metas"/>
-
-    <item
         android:id = "@+id/navigation_diario"
         android:icon="@drawable/ic_diario"
         android:title="@string/titulo_diário"/>
 
     <item
-        android:id = "@+id/navigation_progresso"
-        android:icon="@drawable/ic_progresso"
-        android:title="@string/titulo_progresso"/>
+        android:id = "@+id/navigation_metas"
+        android:icon="@drawable/ic_metas"
+        android:title="@string/titulo_metas"/>
 </menu>

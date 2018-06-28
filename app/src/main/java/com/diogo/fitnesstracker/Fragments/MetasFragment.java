@@ -88,9 +88,13 @@ public class MetasFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        obtemDados();
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        obtemDados();
+    }
 
     public void obtemDados()
     {
