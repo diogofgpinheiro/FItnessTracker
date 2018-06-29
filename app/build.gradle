@@ -31,9 +31,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     //firebase
-    implementation 'com.google.firebase:firebase-database:11.8.0'
-    implementation 'com.google.firebase:firebase-auth:11.8.0'
-    implementation 'com.google.firebase:firebase-storage:11.8.0'
+    implementation 'com.google.firebase:firebase-database:15.0.0'
+    implementation 'com.google.firebase:firebase-auth:15.0.0'
+    implementation 'com.google.firebase:firebase-storage:15.0.0'
     implementation 'com.firebaseui:firebase-ui-storage:0.6.0'
 
     implementation 'com.android.support:recyclerview-v7:27.1.1'
@@ -44,6 +44,9 @@ dependencies {
 
     //imagem em circulo
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+
+    implementation 'com.google.zxing:core:3.2.1'
+    implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
 }
 
 apply plugin: 'com.google.gms.google-services'
