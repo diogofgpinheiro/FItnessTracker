@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.diogo.fitnesstracker.R;
 import com.diogo.fitnesstracker.config.ConfiguracaoFirebase;
@@ -43,7 +44,6 @@ public class Login extends AppCompatActivity {
                 // Começar nova atividade
                 startActivity(new Intent(Login.this,Registar.class));
                 overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
-                finish();
             }
         });
 
@@ -98,6 +98,7 @@ public class Login extends AppCompatActivity {
                         excessao = "Erro ao efetuar o login";
                         e.printStackTrace();
                     }
+                    Toast.makeText(Login.this,excessao,Toast.LENGTH_SHORT).show();
                 }
             }
         });

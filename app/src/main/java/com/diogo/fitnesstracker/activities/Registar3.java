@@ -142,8 +142,8 @@ public class Registar3 extends AppCompatActivity {
                     }catch (Exception e)
                     {
                         excessao = "Erro ao registar o utilizador" + e.getMessage();
-                        Toast.makeText(Registar3.this,excessao,Toast.LENGTH_SHORT).show();
                     }
+                    Toast.makeText(Registar3.this,excessao,Toast.LENGTH_SHORT).show();
                 }
             }
         });
