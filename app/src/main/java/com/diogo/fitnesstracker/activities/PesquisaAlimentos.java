@@ -1,12 +1,18 @@
 package com.diogo.fitnesstracker.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.provider.ContactsContract;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -24,6 +30,7 @@ import com.google.zxing.Result;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -77,7 +84,6 @@ public class PesquisaAlimentos extends AppCompatActivity {
         searchPesquisa.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Toast.makeText(PesquisaAlimentos.this,query,Toast.LENGTH_LONG).show();
                 String textoInserido = query.toUpperCase();
                 if(!textoInserido.trim().equals("")) {
                     procuraAlimentos(textoInserido);
@@ -111,24 +117,23 @@ public class PesquisaAlimentos extends AppCompatActivity {
     private void procuraAlimentos(final String texto)
     {
         pesquisaRef = firebaseRef.child("Alimentos");
-        valueEventListenerPesquisa = pesquisaRef.addValueEventListener(new ValueEventListener() {
+        pesquisaRef.addListenerForSingleValueEvent( new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+                listaAlimentos.clear();
                 for(DataSnapshot dados:dataSnapshot.getChildren())
                 {
-                    listaAlimentos.clear();
                     Alimentos alimento = dados.getValue(Alimentos.class);
                     String nome = alimento.getNome();
                     boolean verifica = nome.toUpperCase().contains(texto);
                     if(verifica)
                     {
-                        Toast.makeText(PesquisaAlimentos.this,nome,Toast.LENGTH_LONG).show();
                         String cal = Integer.toString(alimento.getCalorias());
                         listaAlimentos.add(new itemsPesquisaAlimentos(alimento.getNome(),alimento.getMarca(),cal));
                     }
-                    adapterListaPesquisaAlimentos.notifyDataSetChanged();
                 }
+                adapterListaPesquisaAlimentos.notifyDataSetChanged();
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -146,7 +151,39 @@ public class PesquisaAlimentos extends AppCompatActivity {
             {
                 Toast.makeText(this,"Cancelou",Toast.LENGTH_LONG).show();
             }else {
-                Toast.makeText(this,result.getContents(),Toast.LENGTH_LONG).show();
+                final String codigo = result.getContents();
+                //Toast.makeText(this,codigo,Toast.LENGTH_LONG).show();
+                firebaseRef.child("Alimentos").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Boolean verifica = false;
+                        Long codigo_barras = null;
+                        for(DataSnapshot dados:dataSnapshot.getChildren()) {
+                            Alimentos alimento = dados.getValue(Alimentos.class);
+                            if(alimento.getCodigo_barras() != null)
+                            {
+                                Long valor = alimento.getCodigo_barras();
+                                if(valor == Long.parseLong(codigo))
+                                {
+                                    verifica = true;
+                                    codigo_barras = valor;
+                                }
+                            }
+                        }
+                        if(verifica)
+                        {
+                            Toast.makeText(PesquisaAlimentos.this,"Sucesso " + codigo_barras,Toast.LENGTH_LONG).show();
+                        }else
+                        {
+                            criaDialogoInsereAlimentoCodigo(codigo);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
             }
         }else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -156,6 +193,51 @@ public class PesquisaAlimentos extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        pesquisaRef.removeEventListener(valueEventListenerPesquisa);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.cria_alimento,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.item_criaAlimento)
+        {
+            Toast.makeText(this,"Criar",Toast.LENGTH_LONG).show();
+            return true;
+        }
+
+        return true;
+    }
+
+    private void criaDialogoInsereAlimentoCodigo(final String codigo)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Lamenta-mos!");
+        builder.setMessage("Este código ainda não se encontra registado. Deseja criar um novo alimento a partir dele?");
+        builder.setPositiveButton("Confimar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(PesquisaAlimentos.this,codigo,Toast.LENGTH_LONG).show();
+
+            }
+        }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        final AlertDialog dialog = builder.create();
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#39796b"));
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#39796b"));
+            }
+        });
+        dialog.show();
     }
 }
