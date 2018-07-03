@@ -1,5 +1,8 @@
 package com.diogo.fitnesstracker.model;
 
+import com.diogo.fitnesstracker.config.ConfiguracaoFirebase;
+import com.google.firebase.database.DatabaseReference;
+
 public class Alimentos {
 
     private String nome;
@@ -84,5 +87,13 @@ public class Alimentos {
 
     public void setCodigo_barras(Long codigo_barras) {
         this.codigo_barras = codigo_barras;
+    }
+
+    public void gravar()
+    {
+        DatabaseReference referenciaFirebase = ConfiguracaoFirebase.getReferenciaFirebase();
+        referenciaFirebase.child("Alimentos")
+                .push()
+                .setValue(this);
     }
 }

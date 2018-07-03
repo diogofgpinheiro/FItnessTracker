@@ -58,8 +58,10 @@ public class PesquisaAlimentos extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pesquisa_alimentos);
+        pesquisaRef = firebaseRef.child("Alimentos");
 
         imagemScanner = findViewById(R.id.imagemBarcode);
+
 
         imagemScanner.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,7 +118,6 @@ public class PesquisaAlimentos extends AppCompatActivity {
 
     private void procuraAlimentos(final String texto)
     {
-        pesquisaRef = firebaseRef.child("Alimentos");
         pesquisaRef.addListenerForSingleValueEvent( new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -158,6 +159,7 @@ public class PesquisaAlimentos extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Boolean verifica = false;
                         Long codigo_barras = null;
+                        String nome = null;
                         for(DataSnapshot dados:dataSnapshot.getChildren()) {
                             Alimentos alimento = dados.getValue(Alimentos.class);
                             if(alimento.getCodigo_barras() != null)
@@ -165,6 +167,7 @@ public class PesquisaAlimentos extends AppCompatActivity {
                                 Long valor = alimento.getCodigo_barras();
                                 if(valor == Long.parseLong(codigo))
                                 {
+                                    nome = alimento.getNome();
                                     verifica = true;
                                     codigo_barras = valor;
                                 }
@@ -172,7 +175,7 @@ public class PesquisaAlimentos extends AppCompatActivity {
                         }
                         if(verifica)
                         {
-                            Toast.makeText(PesquisaAlimentos.this,"Sucesso " + codigo_barras,Toast.LENGTH_LONG).show();
+                            Toast.makeText(PesquisaAlimentos.this,"Sucesso " + nome,Toast.LENGTH_LONG).show();
                         }else
                         {
                             criaDialogoInsereAlimentoCodigo(codigo);
@@ -206,7 +209,7 @@ public class PesquisaAlimentos extends AppCompatActivity {
         int id = item.getItemId();
         if(id == R.id.item_criaAlimento)
         {
-            Toast.makeText(this,"Criar",Toast.LENGTH_LONG).show();
+            startActivity(new Intent(PesquisaAlimentos.this,CriaAlimento.class));
             return true;
         }
 
@@ -221,8 +224,9 @@ public class PesquisaAlimentos extends AppCompatActivity {
         builder.setPositiveButton("Confimar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(PesquisaAlimentos.this,codigo,Toast.LENGTH_LONG).show();
-
+                Intent i = new Intent(PesquisaAlimentos.this,CriaAlimento.class);
+                i.putExtra("CODIGO_BARRAS",codigo);
+                startActivity(i);
             }
         }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override

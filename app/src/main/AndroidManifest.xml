@@ -45,8 +45,14 @@
         <activity
             android:name=".activities.PesquisaAlimentos"
             android:screenOrientation="portrait" />
-        <activity android:name=".activities.CaptureActivityPortrait" android:screenOrientation="portrait" android:stateNotNeeded="true"
-            android:theme="@style/zxing_CaptureTheme" android:windowSoftInputMode="stateAlwaysHidden"></activity>
+        <activity
+            android:name=".activities.CaptureActivityPortrait"
+            android:screenOrientation="portrait"
+            android:stateNotNeeded="true"
+            android:theme="@style/zxing_CaptureTheme"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".activities.Alimento" />
+        <activity android:name=".activities.CriaAlimento"></activity>
     </application>
 
 </manifest>

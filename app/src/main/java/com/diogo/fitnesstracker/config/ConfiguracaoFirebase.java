@@ -27,6 +27,7 @@ public class ConfiguracaoFirebase {
     {
         if(autenticacao == null)
         {
+            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
             autenticacao = FirebaseAuth.getInstance();
         }
         return autenticacao;
