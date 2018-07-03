@@ -141,6 +141,7 @@ public class CriaAlimento extends AppCompatActivity {
                 conteudoAlimento.setGorduras(gorduras);
                 if(soma>calorias-30 && soma<calorias+30) {
                     conteudoAlimento.gravar();
+                    //TODO ir para pagina diário e inserir alimento criado nela
                     finish();
                 }else {
                     Toast.makeText(CriaAlimento.this,"Por favor introduza os valores corretos nos macronutrientes",Toast.LENGTH_SHORT).show();

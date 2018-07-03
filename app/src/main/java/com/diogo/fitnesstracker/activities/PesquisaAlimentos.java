@@ -175,6 +175,7 @@ public class PesquisaAlimentos extends AppCompatActivity {
                         }
                         if(verifica)
                         {
+                            //Todo ir para página do alimento
                             Toast.makeText(PesquisaAlimentos.this,"Sucesso " + nome,Toast.LENGTH_LONG).show();
                         }else
                         {

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.diogo.fitnesstracker.R;
+import com.diogo.fitnesstracker.activities.Alimento;
 import com.diogo.fitnesstracker.activities.PesquisaAlimentos;
 
 /**
@@ -17,7 +18,7 @@ import com.diogo.fitnesstracker.activities.PesquisaAlimentos;
  */
 public class DiarioFragment extends Fragment {
 
-    Button botao;
+    Button botao,botao2;
 
 
     public DiarioFragment() {
@@ -32,11 +33,19 @@ public class DiarioFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_diario, container, false);
 
         botao = v.findViewById(R.id.button3);
+        botao2 = v.findViewById(R.id.button4);
 
         botao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(),PesquisaAlimentos.class));
+            }
+        });
+
+        botao2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),Alimento.class));
             }
         });
 
