@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.provider.ContactsContract;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -45,6 +46,8 @@ public class PesquisaAlimentos extends AppCompatActivity {
     private RecyclerView recyclerPesquisa;
     private List<itemsPesquisaAlimentos> listaAlimentos = new ArrayList<>();
     private adapterListaPesquisaAlimentos adapterListaPesquisaAlimentos;
+    private ActionBar toolbar;
+    private Bundle extras;
 
 
     private ImageView imagemScanner;
@@ -59,6 +62,14 @@ public class PesquisaAlimentos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pesquisa_alimentos);
         pesquisaRef = firebaseRef.child("Alimentos");
+        extras = getIntent().getExtras();
+
+        toolbar = getSupportActionBar();
+        toolbar.setDisplayHomeAsUpEnabled(true);
+        if(extras !=null) {
+            String refeicao = extras.getString("REFEICAO");
+            toolbar.setTitle(refeicao);
+        }
 
         imagemScanner = findViewById(R.id.imagemBarcode);
 
@@ -131,7 +142,7 @@ public class PesquisaAlimentos extends AppCompatActivity {
                     if(verifica)
                     {
                         String cal = Integer.toString(alimento.getCalorias());
-                        listaAlimentos.add(new itemsPesquisaAlimentos(alimento.getNome(),alimento.getMarca(),cal));
+                        listaAlimentos.add(new itemsPesquisaAlimentos(alimento.getNome(),alimento.getMarca(),cal,dados.getKey()));
                     }
                 }
                 adapterListaPesquisaAlimentos.notifyDataSetChanged();
@@ -207,14 +218,17 @@ public class PesquisaAlimentos extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if(id == R.id.item_criaAlimento)
-        {
-            startActivity(new Intent(PesquisaAlimentos.this,CriaAlimento.class));
-            return true;
-        }
 
-        return true;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            case R.id.item_criaAlimento:
+                startActivity(new Intent(PesquisaAlimentos.this,CriaAlimento.class));
+                return true;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void criaDialogoInsereAlimentoCodigo(final String codigo)
@@ -245,4 +259,5 @@ public class PesquisaAlimentos extends AppCompatActivity {
         });
         dialog.show();
     }
+
 }

@@ -5,14 +5,16 @@ public class itemsPesquisaAlimentos {
     private String nome;
     private String descricao;
     private String calorias;
+    private String codigo;
 
     public itemsPesquisaAlimentos() {
     }
 
-    public itemsPesquisaAlimentos(String nome, String descricao, String calorias) {
+    public itemsPesquisaAlimentos(String nome, String descricao, String calorias,String codigo) {
         this.nome = nome;
         this.descricao = descricao;
         this.calorias = calorias;
+        this.codigo = codigo;
     }
 
     public String getNome() {
@@ -37,5 +39,13 @@ public class itemsPesquisaAlimentos {
 
     public void setCalorias(String calorias) {
         this.calorias = calorias;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 }

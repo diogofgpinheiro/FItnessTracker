@@ -9,27 +9,43 @@
 
 
     <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:alpha="0.9"
         android:background="@android:color/white"
         android:orientation="vertical"
-        android:alpha="0.9">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/textoNomeAlimento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="12dp"
+            android:paddingTop="12dp"
             android:text="Nome do alimento"
             android:textColor="@android:color/black"
             android:textSize="20sp"
-            android:textStyle="normal"
-            android:paddingTop="12dp"
-            android:paddingLeft="12dp" />
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/textoMarca"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="marca"
+            android:textColor="@android:color/darker_gray"
+            android:paddingLeft="12dp"
+            android:visibility="gone"
+            />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="10dp"
-            android:background="@android:color/darker_gray"/>
+            android:background="@android:color/darker_gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,31 +55,32 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingLeft="12dp"
+                android:paddingTop="12dp"
                 android:text="Quantidade"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
-                android:textStyle="normal"
-                android:paddingTop="12dp"
-                android:paddingLeft="12dp" />
+                android:textStyle="normal" />
 
             <TextView
+                android:id="@+id/textoQuantidade"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:paddingRight="12dp"
+                android:paddingTop="12dp"
                 android:text="100"
+                android:textAlignment="textEnd"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="16sp"
-                android:textStyle="normal"
-                android:paddingTop="12dp"
-                android:paddingRight="12dp"
-                android:layout_gravity="end"
-                android:textAlignment="textEnd" />
+                android:textStyle="normal" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="10dp"
-            android:background="@android:color/darker_gray"/>
+            android:background="@android:color/darker_gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -73,60 +90,60 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tamnho da porção"
+                android:paddingLeft="12dp"
+                android:paddingTop="12dp"
+                android:text="Unidade"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
-                android:textStyle="normal"
-                android:paddingTop="12dp"
-                android:paddingLeft="12dp" />
+                android:textStyle="normal" />
 
             <TextView
+                android:id="@+id/textoUnidade"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="100 gr"
+                android:layout_gravity="end"
+                android:paddingRight="12dp"
+                android:paddingTop="12dp"
+                android:text="gramas"
+                android:textAlignment="textEnd"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="16sp"
-                android:textStyle="normal"
-                android:paddingTop="12dp"
-                android:paddingRight="12dp"
-                android:layout_gravity="end"
-                android:textAlignment="textEnd" />
+                android:textStyle="normal" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="10dp"
-            android:background="@android:color/darker_gray"/>
+            android:background="@android:color/darker_gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            
+
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/graficoAlimento"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:layout_gravity="start"
-                />
+                android:layout_gravity="start" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_gravity="center"
-                >
+                android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/textoHidratos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:text="70g"
+                    android:textAlignment="center"
                     android:textColor="@android:color/black"
                     android:textSize="14sp"
-                    android:textStyle="normal"
-                    android:textAlignment="center"
-                    android:layout_gravity="center"/>
+                    android:textStyle="normal" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -141,19 +158,20 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_gravity="center"
-                android:layout_marginLeft="20dp">
+                android:layout_marginLeft="20dp"
+                android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/textoProteinas"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:text="70g"
+                    android:textAlignment="center"
                     android:textColor="@android:color/black"
                     android:textSize="14sp"
-                    android:textStyle="normal"
-                    android:textAlignment="center"
-                    android:layout_gravity="center"/>
+                    android:textStyle="normal" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -168,19 +186,20 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_gravity="center"
-                android:layout_marginLeft="20dp">
+                android:layout_marginLeft="20dp"
+                android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/textoGorduras"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:text="70g"
+                    android:textAlignment="center"
                     android:textColor="@android:color/black"
                     android:textSize="14sp"
-                    android:textStyle="normal"
-                    android:textAlignment="center"
-                    android:layout_gravity="center"/>
+                    android:textStyle="normal" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -195,9 +214,22 @@
         </LinearLayout>
 
 
-
-
     </LinearLayout>
 
+    <Button
 
+        android:id="@+id/botaoAdiciona"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginStart="24dp"
+        android:background="@drawable/botao_login"
+        android:text="Confimar"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>
