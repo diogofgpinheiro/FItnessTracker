@@ -1,5 +1,6 @@
 package com.diogo.fitnesstracker.activities;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,10 +12,12 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.diogo.fitnesstracker.R;
 import com.diogo.fitnesstracker.config.ConfiguracaoFirebase;
+import com.diogo.fitnesstracker.helper.CodificadorBase64;
 import com.diogo.fitnesstracker.model.Alimentos;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -24,7 +27,7 @@ public class CriaAlimento extends AppCompatActivity {
     private ActionBar toolbar;
     private FirebaseAuth autenticacao = ConfiguracaoFirebase.getAutenticacao();
     private DatabaseReference firebaseRef = ConfiguracaoFirebase.getReferenciaFirebase();
-    private AutoCompleteTextView valorUnidade;
+    private Spinner valorUnidade;
     private EditText valorNome,valorMarca,valorQuantidade,valorCalorias,valorCarbo,valorProt,valorGord;
     private Button botaoCriaAlimento;
     private Bundle extras;
@@ -47,15 +50,8 @@ public class CriaAlimento extends AppCompatActivity {
         botaoCriaAlimento = findViewById(R.id.buttonCriaAlimento);
         extras = getIntent().getExtras();
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,unidades);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,unidades);
         valorUnidade.setAdapter(arrayAdapter);
-
-        valorUnidade.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                valorUnidade.showDropDown();
-            }
-        });
 
         botaoCriaAlimento.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +63,7 @@ public class CriaAlimento extends AppCompatActivity {
                 String textoCarbo = valorCarbo.getText().toString();
                 String textoProt = valorProt.getText().toString();
                 String textoGord = valorGord.getText().toString();
-                String textoUnidade = valorUnidade.getText().toString();
+                String textoUnidade = valorUnidade.getSelectedItem().toString();
                 String codigo = null;
 
                 if(extras != null)
@@ -140,8 +136,14 @@ public class CriaAlimento extends AppCompatActivity {
                 conteudoAlimento.setProteinas(proteinas);
                 conteudoAlimento.setGorduras(gorduras);
                 if(soma>calorias-30 && soma<calorias+30) {
-                    conteudoAlimento.gravar();
+                    final String IDUtilizador = CodificadorBase64.codificaBase64(autenticacao.getCurrentUser().getEmail());
+                    if(extras != null) {
+                        String refeicao = extras.getString("REFEICAO");
+                        String data = extras.getString("DATA");
+                        conteudoAlimento.gravar(data,IDUtilizador,refeicao);
+                    }
                     //TODO ir para pagina diário e inserir alimento criado nela
+                    startActivity(new Intent(CriaAlimento.this,PaginaPrincipal.class));
                     finish();
                 }else {
                     Toast.makeText(CriaAlimento.this,"Por favor introduza os valores corretos nos macronutrientes",Toast.LENGTH_SHORT).show();
@@ -151,7 +153,7 @@ public class CriaAlimento extends AppCompatActivity {
         });
     }
 
-    private static final String[] unidades = new String[]{"gramas","colher de chá","colher de sopa","bolacha"};
+    private static final String[] unidades = new String[]{"gramas"};
 
 
     @Override

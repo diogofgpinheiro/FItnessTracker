@@ -141,7 +141,7 @@
 
             <EditText
                 android:id="@+id/editQuantidade"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="8dp"
                 android:layout_weight="1"
@@ -154,19 +154,13 @@
                 android:textSize="16sp"
                 />
 
-            <AutoCompleteTextView
+            <Spinner
                 android:id="@+id/editUnidade"
-                android:layout_width="match_parent"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:ems="10"
-                android:hint="unidade(s)"
-                android:inputType="text"
-                android:paddingLeft="8dp"
-                android:paddingTop="2dp"
-                android:textSize="16sp"
-                android:clickable="true" />
+                android:layout_gravity="right"/>
+
+
         </LinearLayout>
     </LinearLayout>
 

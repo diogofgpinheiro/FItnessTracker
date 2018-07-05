@@ -1,6 +1,7 @@
 package com.diogo.fitnesstracker.model;
 
 import com.diogo.fitnesstracker.config.ConfiguracaoFirebase;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 
 public class Alimentos {
@@ -89,11 +90,24 @@ public class Alimentos {
         this.codigo_barras = codigo_barras;
     }
 
-    public void gravar()
+    public void gravar(String data,String id,String refeicao)
     {
         DatabaseReference referenciaFirebase = ConfiguracaoFirebase.getReferenciaFirebase();
+        String key = referenciaFirebase.child("Alimentos")
+                .push().getKey();
         referenciaFirebase.child("Alimentos")
-                .push()
+                .child(key)
                 .setValue(this);
+        referenciaFirebase.child("Refeicoes").child(id).child(data).child(refeicao).child(key).setValue(this);
+        referenciaFirebase.child("Recentes").child(id).child(key).setValue(this);
+
+    }
+
+
+    public void adicionaRefeicao(String id,String codigo,String refeicao,String data)
+    {
+        DatabaseReference referenciaFirebase = ConfiguracaoFirebase.getReferenciaFirebase();
+        referenciaFirebase.child("Refeicoes").child(id).child(data).child(refeicao).child(codigo).setValue(this);
+        referenciaFirebase.child("Recentes").child(id).child(codigo).setValue(this);
     }
 }

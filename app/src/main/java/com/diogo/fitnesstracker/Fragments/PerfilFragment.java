@@ -15,6 +15,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -26,6 +29,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.diogo.fitnesstracker.Manifest;
 import com.diogo.fitnesstracker.R;
+import com.diogo.fitnesstracker.activities.MainActivity;
 import com.diogo.fitnesstracker.adapter.adapterListaPerfil;
 import com.diogo.fitnesstracker.config.ConfiguracaoFirebase;
 import com.diogo.fitnesstracker.helper.Calorias;
@@ -153,6 +157,7 @@ public class PerfilFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         obtemDados();
     }
 
@@ -312,5 +317,24 @@ public class PerfilFragment extends Fragment {
         perfilRef.removeEventListener(valueEventListenerPerfil);
         metasRef.removeEventListener(valueEventListenerMetas);
         valoresRef.removeEventListener(valueEventListenerValores);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.logout,menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.item_logout:
+                autenticacao.signOut();
+                startActivity(new Intent(getActivity(), MainActivity.class));
+                getActivity().finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

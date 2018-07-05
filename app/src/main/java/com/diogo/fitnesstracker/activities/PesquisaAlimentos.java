@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.diogo.fitnesstracker.R;
 import com.diogo.fitnesstracker.config.ConfiguracaoFirebase;
+import com.diogo.fitnesstracker.helper.CodificadorBase64;
 import com.diogo.fitnesstracker.model.Alimentos;
 import com.diogo.fitnesstracker.model.itemsPesquisaAlimentos;
 import com.google.firebase.auth.FirebaseAuth;
@@ -54,8 +55,8 @@ public class PesquisaAlimentos extends AppCompatActivity {
 
     private FirebaseAuth autenticacao = ConfiguracaoFirebase.getAutenticacao();
     private DatabaseReference firebaseRef = ConfiguracaoFirebase.getReferenciaFirebase();
-    private DatabaseReference pesquisaRef;
-    private ValueEventListener valueEventListenerPesquisa;
+    private DatabaseReference pesquisaRef,pesquisaRecenteRef;
+    private String refeicao,data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +68,8 @@ public class PesquisaAlimentos extends AppCompatActivity {
         toolbar = getSupportActionBar();
         toolbar.setDisplayHomeAsUpEnabled(true);
         if(extras !=null) {
-            String refeicao = extras.getString("REFEICAO");
+            refeicao = extras.getString("REFEICAO");
+            data = extras.getString("DATA");
             toolbar.setTitle(refeicao);
         }
 
@@ -111,19 +113,21 @@ public class PesquisaAlimentos extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
                 String textoInserido = newText.toUpperCase();
                 if(!textoInserido.trim().equals("")) {
-                    procuraAlimentos(textoInserido);
+                    procuraAlimentosRecentes(textoInserido);
                 }else {
                     listaAlimentos.clear();
                     adapterListaPesquisaAlimentos.notifyDataSetChanged();
+                    mostraRecentes();
                 }
                 return true;
             }
         });
 
         recyclerPesquisa = findViewById(R.id.recyclerPesquisa);
-        adapterListaPesquisaAlimentos = new adapterListaPesquisaAlimentos(this,listaAlimentos);
+        adapterListaPesquisaAlimentos = new adapterListaPesquisaAlimentos(this,listaAlimentos,refeicao,data);
         recyclerPesquisa.setLayoutManager(new LinearLayoutManager(this));
         recyclerPesquisa.setAdapter(adapterListaPesquisaAlimentos);
+        mostraRecentes();
     }
 
 
@@ -154,6 +158,58 @@ public class PesquisaAlimentos extends AppCompatActivity {
         });
     }
 
+    private void procuraAlimentosRecentes(final String texto)
+    {
+        String IDUtilizador = CodificadorBase64.codificaBase64(autenticacao.getCurrentUser().getEmail());
+        pesquisaRecenteRef = firebaseRef.child("Recentes").child(IDUtilizador);
+        pesquisaRecenteRef.addListenerForSingleValueEvent( new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                listaAlimentos.clear();
+                for(DataSnapshot dados:dataSnapshot.getChildren())
+                {
+                    Alimentos alimento = dados.getValue(Alimentos.class);
+                    String nome = alimento.getNome();
+                    boolean verifica = nome.toUpperCase().contains(texto);
+                    if(verifica)
+                    {
+                        String cal = Integer.toString(alimento.getCalorias());
+                        listaAlimentos.add(new itemsPesquisaAlimentos(alimento.getNome(),alimento.getMarca(),cal,dados.getKey()));
+                    }
+                }
+                adapterListaPesquisaAlimentos.notifyDataSetChanged();
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void mostraRecentes()
+    {
+        String IDUtilizador = CodificadorBase64.codificaBase64(autenticacao.getCurrentUser().getEmail());
+        pesquisaRecenteRef = firebaseRef.child("Recentes").child(IDUtilizador);
+        pesquisaRecenteRef.addListenerForSingleValueEvent( new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                listaAlimentos.clear();
+                for(DataSnapshot dados:dataSnapshot.getChildren()) {
+                    Alimentos alimento = dados.getValue(Alimentos.class);
+                    String nome = alimento.getNome();
+                    String cal = Integer.toString(alimento.getCalorias());
+                    listaAlimentos.add(new itemsPesquisaAlimentos(alimento.getNome(), alimento.getMarca(), cal, dados.getKey()));
+                }
+                adapterListaPesquisaAlimentos.notifyDataSetChanged();
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
@@ -161,7 +217,6 @@ public class PesquisaAlimentos extends AppCompatActivity {
         {
             if(result.getContents()==null)
             {
-                Toast.makeText(this,"Cancelou",Toast.LENGTH_LONG).show();
             }else {
                 final String codigo = result.getContents();
                 //Toast.makeText(this,codigo,Toast.LENGTH_LONG).show();
@@ -170,7 +225,7 @@ public class PesquisaAlimentos extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Boolean verifica = false;
                         Long codigo_barras = null;
-                        String nome = null;
+                        String key = null;
                         for(DataSnapshot dados:dataSnapshot.getChildren()) {
                             Alimentos alimento = dados.getValue(Alimentos.class);
                             if(alimento.getCodigo_barras() != null)
@@ -178,16 +233,25 @@ public class PesquisaAlimentos extends AppCompatActivity {
                                 Long valor = alimento.getCodigo_barras();
                                 if(valor == Long.parseLong(codigo))
                                 {
-                                    nome = alimento.getNome();
                                     verifica = true;
                                     codigo_barras = valor;
+                                    key = dados.getKey();
                                 }
                             }
                         }
                         if(verifica)
                         {
                             //Todo ir para página do alimento
-                            Toast.makeText(PesquisaAlimentos.this,"Sucesso " + nome,Toast.LENGTH_LONG).show();
+                            Intent i = new Intent(PesquisaAlimentos.this, Alimento.class);
+
+                            if(extras !=null) {
+                                String ref = extras.getString("REFEICAO");
+                                String date = extras.getString("DATA");
+                                i.putExtra("IDAlimento", key);
+                                i.putExtra("REFEICAO", ref);
+                                i.putExtra("DATA", date);
+                                startActivity(i);
+                            }
                         }else
                         {
                             criaDialogoInsereAlimentoCodigo(codigo);
@@ -224,7 +288,15 @@ public class PesquisaAlimentos extends AppCompatActivity {
                 this.finish();
                 return true;
             case R.id.item_criaAlimento:
-                startActivity(new Intent(PesquisaAlimentos.this,CriaAlimento.class));
+                final String IDUtilizador = CodificadorBase64.codificaBase64(autenticacao.getCurrentUser().getEmail());
+                Intent i = new Intent(PesquisaAlimentos.this, CriaAlimento.class);
+                if (extras != null) {
+                    String ref = extras.getString("REFEICAO");
+                    String date = extras.getString("DATA");
+                    i.putExtra("REFEICAO", ref);
+                    i.putExtra("DATA", date);
+                    startActivity(i);
+                }
                 return true;
 
         }
@@ -234,14 +306,20 @@ public class PesquisaAlimentos extends AppCompatActivity {
     private void criaDialogoInsereAlimentoCodigo(final String codigo)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Lamenta-mos!");
+        builder.setTitle("Lamentamos!");
         builder.setMessage("Este código ainda não se encontra registado. Deseja criar um novo alimento a partir dele?");
         builder.setPositiveButton("Confimar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent i = new Intent(PesquisaAlimentos.this,CriaAlimento.class);
                 i.putExtra("CODIGO_BARRAS",codigo);
-                startActivity(i);
+                if (extras != null) {
+                    String ref = extras.getString("REFEICAO");
+                    String date = extras.getString("DATA");
+                    i.putExtra("REFEICAO", ref);
+                    i.putExtra("DATA", date);
+                    startActivity(i);
+                }
             }
         }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
