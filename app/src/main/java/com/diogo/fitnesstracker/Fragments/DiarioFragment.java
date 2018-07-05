@@ -34,6 +34,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -342,9 +343,9 @@ public class DiarioFragment extends Fragment {
                 }
 
                 caloriasPeqAlmoco.setText(Integer.toString(calPeqAlmoco));
-                hidratosPeqAlmoco.setText(Double.toString(h));
-                proteinasPeqAlmoco.setText(Double.toString(p));
-                gordurasPeqAlmoco.setText(Double.toString(g));
+                hidratosPeqAlmoco.setText(formataDouble(h));
+                proteinasPeqAlmoco.setText(formataDouble(p));
+                gordurasPeqAlmoco.setText(formataDouble(g));
                 carregaCalorias();
                 adapterPeqAlmoco.notifyDataSetChanged();
             }
@@ -378,9 +379,9 @@ public class DiarioFragment extends Fragment {
                 }
 
                 caloriasAlmoco.setText(Integer.toString(calAlmoco));
-                hidratosAlmoco.setText(Double.toString(h));
-                proteinasAlmoco.setText(Double.toString(p));
-                gordurasAlmoco.setText(Double.toString(g));
+                hidratosAlmoco.setText(formataDouble(h));
+                proteinasAlmoco.setText(formataDouble(p));
+                gordurasAlmoco.setText(formataDouble(g));
                 adapterAlmoco.notifyDataSetChanged();
                 carregaCalorias();
             }
@@ -413,9 +414,9 @@ public class DiarioFragment extends Fragment {
                 }
 
                 caloriasLanche.setText(Integer.toString(calLanche));
-                hidratosLanche.setText(Double.toString(h));
-                proteinasLanche.setText(Double.toString(p));
-                gordurasLanche.setText(Double.toString(g));
+                hidratosLanche.setText(formataDouble(h));
+                proteinasLanche.setText(formataDouble(p));
+                gordurasLanche.setText(formataDouble(g));
                 adapterLanche.notifyDataSetChanged();
                 carregaCalorias();
             }
@@ -447,9 +448,9 @@ public class DiarioFragment extends Fragment {
                     g = g + alimento.getGorduras();
                 }
                 caloriasJantar.setText(Integer.toString(calJantar));
-                hidratosJantar.setText(Double.toString(h));
-                proteinasJantar.setText(Double.toString(p));
-                gordurasJantar.setText(Double.toString(g));
+                hidratosJantar.setText(formataDouble(h));
+                proteinasJantar.setText(formataDouble(p));
+                gordurasJantar.setText(formataDouble(g));
                 adapterJantar.notifyDataSetChanged();
                 carregaCalorias();
             }
@@ -461,7 +462,15 @@ public class DiarioFragment extends Fragment {
     }
 
 
+    private String formataDouble(double d)
+    {
+        NumberFormat formatter = NumberFormat.getNumberInstance();
+        formatter.setMinimumFractionDigits(0);
+        formatter.setMaximumFractionDigits(2);
 
+        String s = formatter.format(d).replaceAll(",",".");
+        return s;
+    }
 
 
     @Override

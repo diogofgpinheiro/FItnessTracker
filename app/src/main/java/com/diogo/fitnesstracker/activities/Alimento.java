@@ -233,7 +233,6 @@ public class Alimento extends AppCompatActivity {
                     formatter.setMinimumFractionDigits(0);
                     formatter.setMaximumFractionDigits(2);
 
-                    DecimalFormat df = new DecimalFormat("#.00");
                     valorHidratos.setText((formatter.format(hidratosAtual) + "g").replaceAll(",","."));
                     valorProteinas.setText((formatter.format(proteinasAtual) + "g").replaceAll(",","."));
                     valorGorduras.setText((formatter.format(gordurasAtual) + "g").replaceAll(",","."));
