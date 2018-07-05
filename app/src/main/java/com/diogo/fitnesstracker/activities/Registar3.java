@@ -12,7 +12,9 @@ import android.widget.Toast;
 
 import com.diogo.fitnesstracker.R;
 import com.diogo.fitnesstracker.config.ConfiguracaoFirebase;
+import com.diogo.fitnesstracker.helper.Calorias;
 import com.diogo.fitnesstracker.helper.CodificadorBase64;
+import com.diogo.fitnesstracker.model.MetasCaloriasModel;
 import com.diogo.fitnesstracker.model.MetasPeso;
 import com.diogo.fitnesstracker.model.Utilizador;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -34,6 +36,7 @@ public class Registar3 extends AppCompatActivity {
     private Button botaoNext;
     private Utilizador utilizador;
     private MetasPeso metasPeso;
+    private MetasCaloriasModel metaCalorias;
     private FirebaseAuth autenticacao;
     private DatabaseReference firebaseRef;
     private Bundle extras;
@@ -70,6 +73,7 @@ public class Registar3 extends AppCompatActivity {
 
                 utilizador = new Utilizador();
                 metasPeso = new MetasPeso();
+                metaCalorias = new MetasCaloriasModel();
                 utilizador.setEmail(textoEmail);
                 utilizador.setPassword(textoPassword);
                 registaUtilizador();
@@ -119,6 +123,17 @@ public class Registar3 extends AppCompatActivity {
                     metasPeso.setNivel_atividade(textoAtividade);
                     metasPeso.setData_inicial(data);
                     metasPeso.gravar(idUtilizador);
+                    metaCalorias.setPerc_almoco(0.25);
+                    metaCalorias.setPerc_peqAlmoco(0.25);
+                    metaCalorias.setPerc_lanche(0.25);
+                    metaCalorias.setPerc_jantar(0.25);
+                    metaCalorias.setPercentagem_carbo(0.5);
+                    metaCalorias.setPercentagem_gordura(0.2);
+                    metaCalorias.setPercentagem_proteina(0.3);
+                    Calorias calc = new Calorias(Double.parseDouble(textoPeso),Double.parseDouble(textoAltura),textoGenero);
+                    int calorias = calc.calculaCalorias(textoAtividade,0,data);
+                    metaCalorias.setCalorias(calorias);
+                    metaCalorias.gravar(idUtilizador);
                     Intent i = new Intent(Registar3.this,PaginaPrincipal.class);
                     startActivity(i);
                     finish();

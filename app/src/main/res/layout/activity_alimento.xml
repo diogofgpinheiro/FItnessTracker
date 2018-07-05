@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.Alimento"
-    android:background="@drawable/bg">
+    android:background="@drawable/bg"
+    tools:context=".activities.Alimento">
 
 
     <LinearLayout
@@ -35,11 +35,10 @@
             android:id="@+id/textoMarca"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="12dp"
             android:text="marca"
             android:textColor="@android:color/darker_gray"
-            android:paddingLeft="12dp"
-            android:visibility="gone"
-            />
+            android:visibility="gone" />
 
         <View
             android:layout_width="match_parent"
@@ -57,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="12dp"
                 android:paddingTop="12dp"
-                android:text="Quantidade"
+                android:text="@string/texto_quantidade"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:textStyle="normal" />
@@ -92,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="12dp"
                 android:paddingTop="12dp"
-                android:text="Unidade"
+                android:text="@string/texto_unidade"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:textStyle="normal" />
@@ -104,7 +103,7 @@
                 android:layout_gravity="end"
                 android:paddingRight="12dp"
                 android:paddingTop="12dp"
-                android:text="gramas"
+                android:text="@string/texto_gramas"
                 android:textAlignment="textEnd"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="16sp"
@@ -148,7 +147,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hidratos"
+                    android:text="@string/texto_hidratos"
                     android:textColor="#33C26F"
                     android:textSize="14sp"
                     android:textStyle="normal" />
@@ -176,7 +175,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Proteinas"
+                    android:text="@string/texto_proteinas"
                     android:textColor="#D9B713"
                     android:textSize="14sp"
                     android:textStyle="normal" />
@@ -204,7 +203,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Gorduras"
+                    android:text="@string/texto_gorduras"
                     android:textColor="#D94D3D"
                     android:textSize="14sp"
                     android:textStyle="normal" />
@@ -227,7 +226,7 @@
         android:layout_marginRight="24dp"
         android:layout_marginStart="24dp"
         android:background="@drawable/botao_login"
-        android:text="Confimar"
+        android:text="@string/botao_confimar"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -1,30 +1,61 @@
 <resources>
     <string name="app_name">FitnessTracker</string>
     <string name="log_in">Log In</string>
-    <string name="text_signUp">Registar</string>
-    <string name="create_account_view">Criar conta</string>
-    <string name="what_s_your_email">What´s your email?</string>
-    <string name="confirm_email">You´ll need to confirm email later.</string>
-    <string name="pick_a_password">Pick a password</string>
-    <string name="minimo_carateres">At least eight characters.</string>
-    <string name="next">Next</string>
-    <string name="title_activity_teste_bottom_navigation">testeBottomNavigation</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="botao_registar">Registar</string>
+    <string name="texto_criar_conta">Criar conta</string>
 
 
     <string name="titulo_perfil">Perfil</string>
     <string name="titulo_progresso">Progresso</string>
     <string name="titulo_diário">Diário</string>
     <string name="titulo_metas">Metas</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="pergunta_nomee">Qual é o seu nome?</string>
+    <string name="pergunta_data_nascimento">Qual é a sua data de nascimento?</string>
+    <string name="pergunta_genero">Qual é o seu género?</string>
+    <string name="botao_proximo">Próximo</string>
+    <string name="pergunta_altura">Qual é a sua altura?</string>
+    <string name="pergunta_peso">Quanto pesa?</string>
+    <string name="pergunta_atividade">Qual é o seu nível de atividade?</string>
+    <string name="pergunta_email">Qual é o seu email?</string>
+    <string name="aviso_email">Introduza um email válido</string>
+    <string name="pergunta_password">Escolha uma password</string>
+    <string name="aviso_password">Escolha uma password forte</string>
+    <string name="botao_acabar">Acabar</string>
+    <string name="botao_confimar">Confimar</string>
+    <string name="texto_gorduras">Gorduras</string>
+    <string name="texto_proteinas">Proteinas</string>
+    <string name="texto_hidratos">Hidratos</string>
+    <string name="texto_unidade">Unidade</string>
+    <string name="texto_quantidade">Quantidade</string>
+    <string name="texto_gramas">gramas</string>
+    <string name="novo_alimento">Novo alimento :</string>
+    <string name="pergunta_nome_alimento">Nome do alimento (obrigatório)</string>
+    <string name="hint_nome_alimento">Arroz</string>
+    <string name="pergunta_marca">Nome da marca</string>
+    <string name="hint_marca">Continente</string>
+    <string name="perguta_quantidade">Porção :</string>
+    <string name="pergunta_quantidades">Porções do alimento (obrigatório)</string>
+    <string name="pergunta_macros">Macronutrientes (obrigatório) :</string>
+    <string name="hint_calorias">Calorias</string>
+    <string name="texto_peq_almoco">Pequeno-almoço</string>
+    <string name="texto_almoco">Almoço</string>
+    <string name="texto_lanche">Lanche</string>
+    <string name="texto_jantar">Jantar</string>
+    <string name="aviso_soma_refeicoes">A soma das refeições tem de ser 100%</string>
+    <string name="texto_altura">Altura</string>
+    <string name="texto_dialogo_alimentos">Porção(ôes) de</string>
+    <string name="texto_nome">Nome</string>
+    <string name="titulo">Titulo</string>
+    <string name="descricao">descrição</string>
+    <string name="conteudo">conteudo</string>
+    <string name="nome_alimento">Nome alimento</string>
+    <string name="cal">cal</string>
+    <string name="cancelar">Cancelar</string>
 
 
     <string-array name="items_fotografia">
         <item>Tirar fotografia</item>
         <item>Escolher fotografia</item>
     </string-array>
+
 </resources>

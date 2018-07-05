@@ -16,7 +16,7 @@
         android:layout_marginBottom="20dp"
         android:layout_marginTop="50dp"
         android:textAllCaps="false"
-        android:text="@string/create_account_view"
+        android:text="@string/texto_criar_conta"
         android:textColor="#fff"
         android:alpha="0.8"
         android:textSize="35sp"
@@ -33,7 +33,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:alpha="0.8"
-        android:text="Qual é o seu email?"
+        android:text="@string/pergunta_email"
         android:textColor="#fff"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -64,7 +64,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="1dp"
         android:alpha="0.8"
-        android:text="@string/confirm_email"
+        android:text="@string/aviso_email"
         android:textColor="#fff"
         android:textSize="12sp"
         android:textStyle="bold" />
@@ -78,7 +78,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:alpha="0.8"
-        android:text="Escolha uma password"
+        android:text="@string/pergunta_password"
         android:textColor="#fff"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -109,7 +109,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="1dp"
         android:alpha="0.8"
-        android:text="Escolha uma password forte"
+        android:text="@string/aviso_password"
         android:textColor="#fff"
         android:textSize="12sp"
         android:textStyle="bold" />
@@ -122,7 +122,7 @@
         android:layout_marginTop="80dp"
         android:background="@drawable/botao_login"
         android:padding="16dp"
-        android:text="Acabar"
+        android:text="@string/botao_acabar"
         android:textColor="#fff"
         android:textStyle="bold" />
 

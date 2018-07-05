@@ -1,5 +1,8 @@
 package com.diogo.fitnesstracker.model;
 
+import com.diogo.fitnesstracker.config.ConfiguracaoFirebase;
+import com.google.firebase.database.DatabaseReference;
+
 public class MetasCaloriasModel {
 
     private int Calorias;
@@ -79,5 +82,14 @@ public class MetasCaloriasModel {
 
     public void setPerc_jantar(double perc_jantar) {
         this.perc_jantar = perc_jantar;
+    }
+
+    public void gravar(String IDUtilizador)
+    {
+        DatabaseReference referenciaFirebase = ConfiguracaoFirebase.getReferenciaFirebase();
+        referenciaFirebase.child("Metas")
+                .child(IDUtilizador)
+                .child("MetasNutricao")
+                .setValue(this);
     }
 }

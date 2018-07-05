@@ -22,7 +22,7 @@
                 android:id="@+id/textoNomeAlimento"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nome alimento"
+                android:text="@string/nome_alimento"
                 android:textColor="@android:color/black"
                 android:textSize="14sp"
                 android:textStyle="normal"
@@ -32,7 +32,7 @@
                 android:id="@+id/textoCaloriasAlimento"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="cal"
+                android:text="@string/cal"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="14sp"
                 android:textStyle="normal"
@@ -43,7 +43,7 @@
             android:id="@+id/textoDescricaoAlimento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Descrição"
+            android:text="@string/descricao"
             android:textColor="@android:color/darker_gray"/>
 
         <View

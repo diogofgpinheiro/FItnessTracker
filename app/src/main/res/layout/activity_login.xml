@@ -72,7 +72,7 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/botao_signup"
         android:padding="16dp"
-        android:text="@string/text_signUp"
+        android:text="@string/botao_registar"
         android:textColor="#fff"
         android:textStyle="bold" />
 </LinearLayout>
